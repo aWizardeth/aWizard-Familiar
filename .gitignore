@@ -1,0 +1,23 @@
+# aWizard-Familiar .gitignore
+# Personal/Local files that shouldn't be shared
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE specific (keep .vscode/ since it's part of the agent setup)
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store?
+ehthumbs.db
+Icon?
+
+# Temporary files
+*.tmp
+*.temp

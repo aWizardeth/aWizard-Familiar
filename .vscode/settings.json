@@ -1,0 +1,43 @@
+{
+  // ─── aWizard Agent Defaults ───────────────────────────────────────
+  // Auto-approve all agent tool calls (no confirmation dialogs).
+  // The tools list itself is defined in .github/agents/awizard.agent.md.
+  // WARNING: This trusts the agent to run any tool without asking.
+  //          Remove this line if you prefer manual approval per tool.
+  "chat.tools.autoApprove": true,
+
+  // Terminal command auto-approve rules (persists across sessions).
+  // Commands matching "true" run without a dialog; "false" always prompt.
+  "chat.tools.terminal.autoApprove": {
+    // Safe read-only / build commands
+    "npm run": true,
+    "npm install": true,
+    "npm test": true,
+    "npx": true,
+    "/^git (status|log|diff|show|branch|remote)\\b/": true,
+    "git add": true,
+    "git commit": true,
+    "ls": true,
+    "cat": true,
+    "Get-ChildItem": true,
+    "Get-Content": true,
+    "Set-Content": true,
+    "Test-Path": true,
+    "mkdir": true,
+    "New-Item": true,
+
+    // Block destructive commands (always prompt)
+    "rm -rf": false,
+    "Remove-Item": false,
+    "/format|del \\//": false
+  },
+
+  // Show tool invocation details expanded (helpful for learning)
+  "chat.agent.thinking.collapsedTools": false,
+
+  // ─── Editor / Workspace Preferences ───────────────────────────────
+  "files.eol": "\n",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
