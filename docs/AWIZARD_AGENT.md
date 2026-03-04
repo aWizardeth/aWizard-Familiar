@@ -121,10 +121,10 @@ User message received
 
 ## Roadmap
 
-- [ ] Phase 1: VS Code agent instructions + docs skeleton (this file)
-- [ ] Phase 2: Discord Activity UI with chat panel stub
-- [ ] Phase 3: Connect to live aWizard bot API
-- [ ] Phase 4: NFT-gated access verification
+- [x] Phase 1: VS Code agent instructions + docs skeleton (this file)
+- [x] Phase 2: Discord Activity UI — WalletConnect v2, NFT loading (sessionStorage cache), Chellyz card game (AI / Hot Seat / PvP Online), Battle tab (PvP lobby, state channel, settle/forfeit), responsive mobile layout
+- [ ] Phase 3: Connect to live aWizard bot API (WizardChat panel `/api/wizard/chat`)
+- [ ] Phase 4: NFT-gated access verification (`/api/nft/gate`)
 - [ ] Phase 5: Real-time battle spectator mode
 - [ ] Phase 6: Inline tournament registration from Discord
 

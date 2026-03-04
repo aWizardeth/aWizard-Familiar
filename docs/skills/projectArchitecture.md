@@ -32,8 +32,25 @@ aWizard can:
 | `src/hooks/`      | Custom React hooks                  | `useXxx.ts`      |
 | `src/store/`      | Zustand state slices                | `xxxStore.ts`    |
 | `src/lib/`        | Utilities, API clients, types       | `camelCase.ts`   |
+| `api/`            | Vercel serverless functions         | `camelCase.ts`   |
 | `docs/`           | Project management markdown          | `camelCase.md`   |
 | `docs/skills/`    | aWizard skill reference files       | `camelCase.md`   |
+
+### Key Files
+
+| File                              | Purpose                                              |
+| --------------------------------- | ---------------------------------------------------- |
+| `src/hooks/useIsMobile.ts`        | ResizeObserver hook, 480px breakpoint for Discord mobile |
+| `src/store/bowActivityStore.ts`   | Top-level app state (auth, user, NFTs)               |
+| `src/store/lobbyStore.ts`         | Battle PvP lobby (state channel handshake)           |
+| `src/store/chellyzStore.ts`       | Chellyz card game state (AI / Hot Seat / PvP)        |
+| `src/store/chellyzLobbyStore.ts`  | Chellyz PvP lobby (deck-based, `bow-chellyz-lobby-v1`) |
+| `src/lib/battleEngine.ts`         | Damage calc, turn order, round resolution            |
+| `src/lib/fighters.ts`             | `ElementType`, `RarityTier`, `calculateFighterDamage()` |
+| `src/lib/stateChannel.ts`         | Chia state channel types + `openChannel()` stub      |
+| `src/lib/trackerClient.ts`        | Koba42Corp Redis tracker client                      |
+| `api/lobbies.ts`                  | Serverless: create/join/poll lobbies (Redis)         |
+| `api/token.ts`                    | Discord OAuth2 token exchange                        |
 
 ## Ecosystem Module Map
 
