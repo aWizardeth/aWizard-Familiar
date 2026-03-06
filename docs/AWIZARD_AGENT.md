@@ -55,6 +55,48 @@ aWizard is a **dual-mode agent**:
 | **Wallet Helper**        | Guides WalletConnect pairing, troubleshoots connection issues      |
 | **Project Updates**      | Surfaces latest changes from `docs/IN_DEVELOPMENT.md` to the team |
 
+---
+
+## Quest Management Workflow 🎯
+
+aWizard uses a **Foundation First** pattern for maximum project velocity.
+
+### Quest Folder Structure
+
+```
+docs/quests/
+├── *.md                    # Active quests (1-2 max)
+├── backlog/
+│   ├── *.md                # New feature quests (not started)
+│   └── enhance-*.md        # Enhancement backlogs (polish work)
+├── done/
+│   └── *.md                # Completed foundations (30-60% done)
+└── diagrams/
+    └── *.md                # Shared Mermaid flow diagrams
+```
+
+### Quest Lifecycle
+
+1. **Create** quest in `backlog/` with full spec
+2. **Activate** by moving to `docs/quests/` when starting
+3. **Build foundation** (30-60% complete):
+   - Research ✅ Math/logic ✅ Scaffold ✅ Core components ✅ README ✅
+4. **Create enhancement backlog** in `backlog/enhance-*.md`
+5. **Move to done/** when foundation is viable
+6. **Update TODO** with completion log entry
+
+### Philosophy
+
+> **Complete quests at 30-60% by delivering foundations, then backlog polish.**
+
+**Why:** Maximizes completion velocity, prevents multi-week stalls, creates clear handoffs.
+
+**Pattern established:** March 6, 2026 — 2 quests completed in 40 minutes using this workflow.
+
+**Full documentation:** `docs/skills/questManagement.md`
+
+---
+
 ## Communication Protocol
 
 ### Connecting to the aWizard Bot (External)
@@ -158,5 +200,8 @@ aWizard draws on a library of skill files in `docs/skills/` for deep domain refe
 | `deploymentInfra.md`              | Vercel/VPS topology, CI/CD, secret separation        |
 | `projectArchitecture.md`          | Module map, naming conventions, brick-by-brick       |
 | `blockchainDecentralization.md`   | Chia primitives, transparency revolution, trustless  |
+| `bowAppReference.md`              | **Live code** — WalletConnect/CHIP-0002, state channel lifecycle, commit-reveal battle protocol, Fighter/Tier types, TrackerClient, BattleState, gotchas |
+| `snesWorldEngine.md`              | SNES-style chunk world, biomes, procedural gen, NPC/quest systems, Godot web export, encounter→battle bridge |
+| `networkGameplayUX.md`            | Spell-cast UX pattern, `useSpellCast` hook, arcane loaders, WebSocket battles, chain tx progress, curse error messages |
 
 Each skill file is self-contained and can be referenced independently when answering domain-specific questions.

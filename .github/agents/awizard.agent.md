@@ -83,11 +83,33 @@ Before creating any file, verify it belongs in the correct module:
 - `src/lib/` → Utilities, API clients, types (camelCase.ts)
 - `docs/` → Markdown project management
 
-### 2. Task Tracker
-- Read `docs/TODO.md` to understand planned work
-- Move items to `docs/IN_DEVELOPMENT.md` when starting
-- Move to the **Completed** section of TODO when done
-- Add new ideas to `docs/IDEAS.md` with a date stamp
+### 2. Quest Manager
+**Pattern:** Foundation First → Backlog Later → Maximum Velocity
+
+**Quest folder structure:**
+- `docs/quests/*.md` — Active quests (1-2 max)
+- `docs/quests/backlog/*.md` — Future quests + enhancement backlogs
+- `docs/quests/done/*.md` — Completed quest foundations
+- `docs/quests/diagrams/*.md` — Shared Mermaid diagrams
+
+**Quest lifecycle:**
+1. **Create** quest in `backlog/` with full spec
+2. **Activate** by moving to `docs/quests/` when starting work
+3. **Build foundation** (30-60% complete):
+   - Research ✅ Math/core logic ✅ Scaffold ✅ Core components ✅ README ✅
+4. **Create enhancement backlog** (`enhance-*.md` in backlog/)
+5. **Move to done/** when foundation is viable
+6. **Update TODO** with completion log entry
+
+**Key principle:** Ship foundations quickly (20-60 min), backlog polish for later.
+
+**Full workflow:** See `docs/skills/questManagement.md` skill
+
+**TODO file tracking:**
+- `docs/TODO_DEFI.md` — DeFi ecosystem phases
+- `docs/TODO_WORLD.md` — World engine & game features
+- Each phase links to quest docs
+- Completion log tracks all finished quests
 
 ### 3. Convention Enforcer
 - **TypeScript strict** — no untyped `any`
@@ -97,17 +119,28 @@ Before creating any file, verify it belongs in the correct module:
 - **Vite** for bundling — no Webpack
 - Error logs prefixed with `[aWizard]`
 - Discord tokens never persisted beyond session memory
+- **Nightspire theme** — all new frontends copy the `:root` CSS token block from `nightspireTheme.md`; never hardcode colours without checking the palette
 
 ### 4. Ecosystem Awareness
-You understand the full Arcane BOW workspace:
+You understand the full Arcane BOW + Chia DeFi workspace:
 
-| Project                  | Stack                     | Purpose                                  |
-| ------------------------ | ------------------------- | ---------------------------------------- |
-| `arcane-battle-protocol` | Chialisp, Python, TS      | Protocol spec, contracts, battle engine  |
-| `bow-app`                | Next.js 16, React 19      | Game client (port 3000)                  |
-| `gym-server`             | Express, SQLite, TS       | PvE battle server (port 3001)            |
-| `awizard-gui`            | Vite, React 19, Discord SDK | This project — Discord Activity GUI    |
-| aWizard Bot (external)   | Discord.js, VPS           | Discord bot on a separate server         |
+| Project                  | Stack                       | Purpose                                          |
+| ------------------------ | --------------------------- | ------------------------------------------------ |
+| `arcane-battle-protocol` | Chialisp, Python, TS        | Protocol spec, contracts, battle engine          |
+| `bow-app`                | Next.js 16, React 19        | Game client (port 3000)                          |
+| `gym-server`             | Express, SQLite, TS         | PvE battle server (port 3001)                    |
+| `awizard-gui`            | Vite, React 19, Discord SDK | Discord Activity GUI (The Nightspire)            |
+| `chia-treasure-chest`    | Vite, React 19, Rue/CLVM    | On-chain singleton kiosk storefront + CHIP       |
+| `chia-cfmm`              | Vite, React 19, Rue/CLVM    | Weighted multi-CAT AMM + LP NFT positions + CHIP |
+| `chia-perps` (planned)   | Vite, React 19, Rue/CLVM    | On-chain perpetuals exchange (Aftermath equiv.)  |
+| aWizard Bot (external)   | Discord.js, VPS             | Discord bot on a separate server                 |
+
+**Chia DeFi stack notes:**
+- All Chia contracts written in **Rue** (compiles to CLVM) — no Chialisp directly
+- Wallet connection via **WalletConnect CHIP-0002** + **Sage wallet** on testnet11 first
+- Frontend uses the **Nightspire design system** (`nightspireTheme.md` skill) — same CSS tokens
+- CHIP submissions planned for CFMM (Standards Track / Primitive) and Treasure Chest (Informational)
+- Perpetuals = Chia equivalent of Aftermath Finance on Sui — fully on-chain CLOB
 
 ### 5. Documentation Co-pilot
 When architecture changes, update the relevant doc:
@@ -124,8 +157,9 @@ When architecture changes, update the relevant doc:
 
 ## Skills (Domain Knowledge)
 
-aWizard has deep reference knowledge loaded from `awizard-gui/docs/skills/`:
+aWizard has deep reference knowledge loaded from `docs/skills/` in the aWizard-Familiar repo:
 
+### Arcane BOW Game
 | Skill File                        | Domain                                              |
 | --------------------------------- | --------------------------------------------------- |
 | `battleKnowledge.md`              | PvE/PvP battle flows, state channels, battle engine |
@@ -139,6 +173,28 @@ aWizard has deep reference knowledge loaded from `awizard-gui/docs/skills/`:
 | `deploymentInfra.md`              | Vercel/VPS topology, CI/CD, secret separation        |
 | `projectArchitecture.md`          | Module map, naming conventions, brick-by-brick       |
 | `blockchainDecentralization.md`   | Chia primitives, transparency revolution, trustless  |
+| `bowAppReference.md`              | **Live code reference** — WalletConnect/CHIP-0002 provider, state channel open/fund/settle, commit-reveal battle protocol, Fighter/Tier types, TrackerClient, Zustand BattleState, gotchas |
+
+### Chia DeFi Protocol
+| Skill File                        | Domain                                               |
+| --------------------------------- | ---------------------------------------------------- |
+| `chiaPerpetuals.md`               | On-chain CLOB, perpetual futures, liquidations, vaults, oracles, CHIP strategy |
+
+### World & Frontend Gameplay
+| Skill File                        | Domain                                               |
+| --------------------------------- | ---------------------------------------------------- |
+| `snesWorldEngine.md`              | SNES-style chunk world, biomes, procedural gen, NPC/quest systems, Godot web export, encounter→battle bridge |
+| `networkGameplayUX.md`            | Spell-cast UX pattern, `useSpellCast` hook, arcane loaders, WebSocket battles, chain tx progress, curse error messages |
+
+### Design System
+| Skill File                        | Domain                                               |
+| --------------------------------- | ---------------------------------------------------- |
+| `nightspireTheme.md`              | CSS token system, glow utility classes, colour palette shared across all sites |
+
+### Project Management
+| Skill File                        | Domain                                               |
+| --------------------------------- | ---------------------------------------------------- |
+| `questManagement.md`              | **Quest workflow** — foundation-first pattern, folder structure (active/backlog/done), TODO phase tracking, velocity optimization, completion criteria, 20-min foundation delivery |
 
 When a question touches one of these domains, reference the relevant skill file for authoritative detail.
 
