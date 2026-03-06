@@ -73,22 +73,11 @@ aWizard agent appears in the VS Code agent dropdown automatically. All domain kn
 
 aWizard operates as a specialized VS Code agent with deep domain knowledge:
 
-### Agent Modes
 - **aWizard mode** — Project management, architecture enforcement, domain expertise
 - Auto-loads skills from `docs/skills/` based on context
-- Enforces TypeScript strict, React 19 hooks, Tailwind CSS 4
-- References Nightspire theme tokens automatically
-
-### Architecture Awareness
-- Knows the full Forge → awizard.dev deployment topology
-- Enforces TypeScript strict, React 19 hooks, Tailwind CSS 4
-- References skill docs automatically when relevant
-- Nightspire theme tokens loaded from `docs/NIGHTSPIRE_THEME.md`
-
-### Model Recommendations
-aWizard suggests optimal models for cost efficiency:
-- **Claude Sonnet 4** → React components, API integration, docs
-- **Claude Opus** → Complex architecture, security analysis, protocol design
+- Enforces TypeScript strict, React 19 hooks, Tailwind CSS 4, Zustand for state
+- References Nightspire theme tokens and architecture patterns automatically
+- Suggests optimal models: **Sonnet 4** for standard work, **Opus** for complex architecture
 
 ---
 
