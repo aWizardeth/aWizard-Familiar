@@ -13,8 +13,6 @@ This repository contains the **agent brain** — specialized VS Code agent confi
 - **📋 Documentation** — Architecture guides, workflows, theme system, deployment maps
 - **🎯 Agent Instructions** — Workspace-wide Copilot behavior and mode definitions
 
-**For project source code**, see **[Forge](https://github.com/aWizardeth/Forge)**.
-
 ---
 
 ## Quick Setup
