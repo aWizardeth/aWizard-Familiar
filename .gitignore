@@ -4,6 +4,7 @@
 projects/
 tests/
 scripts/
+docs/quests/
 FORGE_README.md
 sync-repos.ps1
 REPOSITORY_SPLIT_GUIDE.md

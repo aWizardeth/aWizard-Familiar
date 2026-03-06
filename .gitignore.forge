@@ -4,7 +4,6 @@
 .github/
 .vscode/
 docs/skills/
-docs/quests/
 docs/AWIZARD_AGENT.md
 docs/QUEST_WORKFLOW.md
 docs/CODE_AUDIT_REPORT.md
