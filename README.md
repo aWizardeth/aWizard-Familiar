@@ -57,15 +57,6 @@ aWizard agent appears in the VS Code agent dropdown automatically. All domain kn
 - **`docs/skills/chiaPerpetuals.md`** — on-chain CLOB, perpetuals, liquidations, oracles
 - **`docs/skills/nightspireTheme.md`** — Nightspire CSS token system, glow classes, shared palette
 
-### Quest Logs
-- **`docs/TODO_DEFI.md`** — Chia DeFi build phases (10 frontends planned, 6 complete)
-- **`docs/TODO_WORLD.md`** — SNES world engine quests (FE/BE/SYNC split)
-- **`docs/quests/`** — Active quest files (1-2 max)
-- **`docs/quests/backlog/`** — Future quests + enhancement backlogs
-### Quest Workflow Documentation
-- **`docs/QUEST_WORKFLOW.md`** — Quick reference cheat sheet for Foundation-First pattern
-- **`docs/skills/questManagement.md`** — Complete workflow guide
-
 ### Architecture & Guides
 - **`docs/ARCHITECTURE.md`** — Full ecosystem deployment map
 - **`docs/NIGHTSPIRE_THEME.md`** — Nightspire CSS token system for all frontends
@@ -73,6 +64,8 @@ aWizard agent appears in the VS Code agent dropdown automatically. All domain kn
 - **`docs/CODE_AUDIT_REPORT.md`** — Code quality baseline and audit results
 - **`docs/TODO_DEFI.md`** — DeFi build phases tracking
 - **`docs/TODO_WORLD.md`** — World engine development tracking
+- **`docs/QUEST_WORKFLOW.md`** — Foundation-First pattern quick reference
+- **`docs/skills/questManagement.md`** — Complete quest workflow guide
 
 ---
 
@@ -81,12 +74,10 @@ aWizard agent appears in the VS Code agent dropdown automatically. All domain kn
 aWizard operates as a specialized VS Code agent with deep domain knowledge:
 
 ### Agent Modes
-- **aWizard mode** — Project management, quest tracking, architecture enforcement
+- **aWizard mode** — Project management, architecture enforcement, domain expertise
 - Auto-loads skills from `docs/skills/` based on context
 - Enforces TypeScript strict, React 19 hooks, Tailwind CSS 4
 - References Nightspire theme tokens automatically
-- **TODO Phase Tracking** — completion logs in `TODO_DEFI.md`
-- See [docs/QUEST_WORKFLOW.md](docs/QUEST_WORKFLOW.md) for the full pattern
 
 ### Architecture Awareness
 - Knows the full Forge → awizard.dev deployment topology
@@ -118,20 +109,6 @@ MIT
 
 ---
 
-## GitHub Repository Strategy
+## Related Projects
 
-This is a **hybrid monorepo** — all code lives in one local folder for development, but syncs to specialized GitHub repos:
-
-- **[aWizard Familiar](https://github.com/aWizardeth/aWizard-Familiar)** (this repo)  
-  Syncs: Agent config (`.github/`), docs (skills/quests), README  
-  Purpose: Shareable agent hub, lightweight (<10MB)
-
-- **[Forge](https://github.com/aWizardeth/Forge)**  
-  Syncs: All projects, tests, scripts, shared docs  
-  Purpose: Complete codebase for collaborators (~500MB)
-
-**Development workflow:** Keep everything in this monorepo, use `sync-repos.ps1` to push selectively.  
-**See:** [REPOSITORY_SPLIT_GUIDE.md](REPOSITORY_SPLIT_GUIDE.md) for full hybrid workflow details.
-
-### Legacy Repositories
-- **[The Nightspire](https://github.com/aWizardeth/The-Nightspire)** — Original Discord Activity repo (now in `projects/awizard-gui/`)
+For the complete Chia DeFi ecosystem source code, see **[Forge](https://github.com/aWizardeth/Forge)** (13 projects, tests, deployment scripts).
