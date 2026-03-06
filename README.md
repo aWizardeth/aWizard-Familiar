@@ -95,9 +95,3 @@ aWizard operates on these principles:
 ## License
 
 MIT
-
----
-
-## Related Projects
-
-For the complete Chia DeFi ecosystem source code, see **[Forge](https://github.com/aWizardeth/Forge)** (13 projects, tests, deployment scripts).
