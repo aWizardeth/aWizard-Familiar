@@ -1,0 +1,69 @@
+# Architecture Index
+
+This index tells you which architecture document to open based on the question you are
+trying to answer.
+
+Use this file when:
+- scoping a backlog quest
+- deciding where a new system belongs in the wizard ecosystem
+- figuring out whether a problem is protocol, frontend, deployment, or workflow
+
+---
+
+## Primary Architecture Docs
+
+| Document | Scope | Open this when |
+| --- | --- | --- |
+| `docs/ARCHITECTURE.md` | Ecosystem-wide product map | You need the high-level subdomain model, project-to-product mapping, or world metaphor |
+| `projects/arcane-battle-protocol/ARCHITECTURE.md` | On-chain game and protocol architecture | You need battle, contract, state-channel, or reward protocol structure |
+| `projects/awizard-gui/docs/ARCHITECTURE.md` | Discord Activity and GUI architecture | You need Nightspire frontend, auth, client structure, or activity integration details |
+
+## Support Architecture Docs
+
+| Document | Scope | Open this when |
+| --- | --- | --- |
+| `projects/arcane-battle-protocol/DEPLOYMENT.md` | Protocol deployment details | You need deployment topology for contracts or battle infrastructure |
+| `docs/DEPLOYMENT_MAP.md` | Deployment surface map | You need to understand what runs where |
+| `docs/ENV_VARS_REFERENCE.md` | Environment variable contract | You need env var names, ownership, or secret boundaries |
+| `docs/WALLETCONNECT_SETUP.md` | Wallet connection setup | You need WalletConnect setup details |
+| `docs/VERCEL_SETUP.md` | Vercel deployment setup | You are deploying frontend or serverless surfaces |
+| `docs/RAILWAY_SETUP.md` | Railway deployment setup | You are using Railway-hosted services |
+
+## Structural and Workflow References
+
+| Document | Scope | Open this when |
+| --- | --- | --- |
+| `docs/skills/projectArchitecture.md` | File/module architecture rules | You are deciding where code or docs should live |
+| `docs/skills/README.md` | Skill system index | You need domain references before implementing |
+| `docs/QUEST_WORKFLOW.md` | Quest lifecycle architecture | You are moving work between backlog, active, and done |
+| `docs/skills/questManagement.md` | Detailed quest workflow | You need the rationale and rules behind the backlog system |
+
+## Architecture by Work Type
+
+### Ecosystem / Product Surface
+- Start with `docs/ARCHITECTURE.md`
+- Then open `docs/DEPLOYMENT_MAP.md` if deployment boundaries matter
+
+### Chia Protocol / Contract System
+- Start with `projects/arcane-battle-protocol/ARCHITECTURE.md`
+- Then open `projects/arcane-battle-protocol/DEPLOYMENT.md`
+- Pair with `docs/skills/chiaPrimitivesPatterns.md` and `docs/skills/blockchainDecentralization.md`
+
+### Nightspire / GUI / Activity
+- Start with `projects/awizard-gui/docs/ARCHITECTURE.md`
+- Then open `docs/WALLETCONNECT_SETUP.md` and `docs/ENV_VARS_REFERENCE.md`
+- Pair with `docs/skills/bowAppReference.md`, `docs/skills/discordActivityAuth.md`, and `docs/skills/nightspireTheme.md`
+
+### Repo Layout / New Module Planning
+- Start with `docs/skills/projectArchitecture.md`
+- Then open `docs/ARCHITECTURE.md`
+
+## Backlog Wiring Rule
+
+Backlog quests should usually link:
+- `docs/ARCHITECTURE_INDEX.md`
+- `docs/skills/README.md`
+- one or two specific architecture docs
+- a small set of quest-relevant skills
+
+This keeps each backlog quest grounded in the correct source of truth.

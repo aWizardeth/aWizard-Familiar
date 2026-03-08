@@ -2,13 +2,13 @@
 
 **Purpose:** Deploy all 8 aWizard frontend projects to Vercel with monorepo support.  
 **Date:** March 6, 2026  
-**Repository:** aWizardeth/aWizard-Familiar
+**Repository:** aWizardxch/aWizard-Familiar
 
 ---
 
 ## 📋 Prerequisites
 
-- GitHub account with access to `aWizardeth/aWizard-Familiar` repository
+- GitHub account with access to `aWizardxch/aWizard-Familiar` repository
 - Vercel account (free tier works, Pro recommended for team collaboration)
 - WalletConnect Project ID (see [WALLETCONNECT_SETUP.md](./WALLETCONNECT_SETUP.md))
 
@@ -24,7 +24,7 @@
 
 ### 2. Import Repository
 1. From Vercel dashboard, click **"Add New..."** → **"Project"**
-2. In the repository list, find **"aWizardeth/aWizard-Familiar"**
+2. In the repository list, find **"aWizardxch/aWizard-Familiar"**
 3. Click **"Import"**
 
 ---

@@ -100,8 +100,14 @@ These variables are **identical across all frontends**:
 |----------|---------------|----------|---------|
 | `VITE_WC_PROJECT_ID` | `a1b2c3d4e5f6...` | ✅ Yes | WalletConnect project ID |
 | `VITE_CHIA_NETWORK` | `testnet11` | ✅ Yes | Network enforcement |
+| `VITE_VAULT_INDEXER_URL` | `https://vaults.awizard.dev/api/vaults` | ⬜ Optional | Frontend vault catalog endpoint |
+| `VAULT_INDEXER_UPSTREAM_URL` | `https://vault-indexer.awizard.dev/api/vaults` | ⬜ Server | Server-side merged vault singleton + oracle feed |
+| `VAULT_REGISTRY_URL` | `https://vault-indexer.awizard.dev/api/vault-registry` | ⬜ Server | Deployed vault singleton registry feed |
+| `VAULT_ORACLE_URL` | `https://oracle.awizard.dev/api/prices` | ⬜ Server | Oracle price feed merged by `/api/vaults` |
 
 **`.env.example` Status:** ✅ Up to date
+
+**Backend note:** `projects/chia-vaults/api/vaults.ts` now expects one real upstream source: either `VAULT_INDEXER_UPSTREAM_URL`, or both `VAULT_REGISTRY_URL` and `VAULT_ORACLE_URL`. If none are set, the route returns `503` and the frontend falls back to local mock data.
 
 ---
 

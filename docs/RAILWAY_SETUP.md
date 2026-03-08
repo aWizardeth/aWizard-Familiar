@@ -3,7 +3,7 @@
 **Purpose:** Deploy the Arcane BOW gym battle server to Railway with persistent SQLite storage.  
 **Date:** March 6, 2026  
 **Target URL:** https://gym.awizard.dev  
-**Repository:** aWizardeth/aWizard-Familiar
+**Repository:** aWizardxch/aWizard-Familiar
 
 ---
 
@@ -26,7 +26,7 @@ The **gym-server** is an Express.js backend that handles:
 
 ## 📋 Prerequisites
 
-- GitHub account with access to `aWizardeth/aWizard-Familiar`
+- GitHub account with access to `aWizardxch/aWizard-Familiar`
 - Railway account (https://railway.app) — free tier works
 - GitHub Personal Access Token (for GitHub Models API)
 - Testnet11 Chia wallet (for gym battle signing)
@@ -47,7 +47,7 @@ The **gym-server** is an Express.js backend that handles:
 ### 1. Import Repository
 1. From Railway dashboard, click **"New Project"**
 2. Select **"Deploy from GitHub repo"**
-3. Choose **"aWizardeth/aWizard-Familiar"**
+3. Choose **"aWizardxch/aWizard-Familiar"**
 4. Click **"Deploy Now"**
 
 ### 2. Configure Monorepo Settings

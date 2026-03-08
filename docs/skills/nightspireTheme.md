@@ -1,7 +1,7 @@
 # Skill: The Nightspire Design System
 
 > The canonical theme specification for all aWizard / Arcane BOW sites.
-> Source of truth: `src/index.css` in https://github.com/aWizardeth/The-Nightspire
+> Source of truth: `src/index.css` in https://github.com/aWizardxch/The-Nightspire
 >
 > **All new frontends** (chia-cfmm, chia-treasure-chest, chia-perps, bow-app) MUST import
 > or replicate this token set to maintain visual consistency across the ecosystem.
@@ -324,5 +324,5 @@ When creating a new project's `src/index.css`:
 
 ---
 
-_Source: https://github.com/aWizardeth/The-Nightspire — `src/index.css`_
+_Source: https://github.com/aWizardxch/The-Nightspire — `src/index.css`_
 _Last updated: 2026-03-05_

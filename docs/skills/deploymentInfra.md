@@ -13,6 +13,7 @@ aWizard can guide:
 - **Environment management** — secret separation, VITE_ prefix rules
 - **Discord Developer Portal** — Activity URL mappings, OAuth2 config
 - **CI/CD** — GitHub Actions for build + deploy on push
+- **Operational support tooling** — database provisioning, wheel publishing, package release hygiene
 
 ## Hosting Topology
 
@@ -52,6 +53,37 @@ git push main
 
 **NEVER** put `DISCORD_CLIENT_SECRET` in a `VITE_` variable.
 
+## Operational Toolchain
+
+### Database Manager
+
+Chia's `database-manager` is a useful reference for declarative infra operations:
+- Config-driven user and database provisioning via YAML
+- `validate` command to catch config errors before applying
+- `apply` command to create databases, users, and grants
+- `ENV:` value expansion for secrets and deployment-time injection
+- Safe default network restriction behavior that falls back to `localhost`
+
+This is the right pattern for future shared infra services when quest systems,
+leaderboards, or back-office tools need managed database access.
+
+### Build Wheels
+
+`build-wheels` is a release-engineering reference for Python package maintenance:
+- focused on automating wheel builds for `pypi.chia.net`
+- useful when internal Chia tooling needs repeatable binary/package publishing
+- relevant for Windows support, packaging consistency, and CI-based artifact generation
+
+This matters if any of our Chia helper scripts graduate into reusable internal tools.
+
+### Python Tooling Expectations
+
+The current Chia reference tools commonly:
+- pin specific `chia-blockchain` versions
+- assume isolated virtual environments
+- rely on wallet or full-node RPC availability
+- are safer to automate through explicit CLI phases than ad hoc scripts
+
 ## Reference Repos
 
 | Repo | Pattern Integrated |
@@ -63,7 +95,11 @@ git push main
 | chia-gaming-tracker | Room discovery, state channel tracking |
 | rue | CLVM language for contract authoring |
 | chia-wallet-sdk | BLS AggSig, CoinSpend driver |
+| database-manager | Declarative database provisioning |
+| build-wheels | Python wheel release automation |
 
 ## Source References
 - `arcane-battle-protocol/DEPLOYMENT.md` — full deployment guide
 - `awizard-gui/docs/ARCHITECTURE.md` — hosting and auth design
+- `https://github.com/Chia-Network/database-manager` — config-driven database ops
+- `https://github.com/Chia-Network/build-wheels` — package build automation

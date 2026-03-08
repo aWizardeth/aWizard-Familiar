@@ -21,10 +21,14 @@
 - Phase 7: **Analytics Hub** ([stats.awizard.dev](http://localhost:5185)) — Ecosystem metrics ✅
 - Phase 10: **Vault Balancer** ([vaults.awizard.dev](http://localhost:5178)) — Foundation complete (math + scaffold) ✅
 
+**✅ Just Completed:**
+- **🚀 CFMM Infrastructure Quest** — Sage RPC + 6 contracts + 3 pools + deployment pipeline ✅
+
 **🚧 In Progress:**
-- **🚀 Deployment Quest** — Testnet11 infrastructure (Step 2/8 complete — 25%)
-- Phase 1: Wallet Connect — integration ready, awaiting testnet wallet testing
-- Phase 3: CFMM Math — complete, awaiting contract compilation
+- **🚀 Deployment Quest** — Testnet11 infrastructure (CFMM foundation complete — 40%)
+- Phase 1: Wallet Connect — integration ready, awaiting testnet wallet testing  
+- **🪄 Forge Stage 2 Execution Flow** — [docs/quests/forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md) — active; Forge now builds the full liquidity bootstrap bundle, next work is fresh testnet11 validation of the companion-spend path
+- **🧩 Forge Bootstrap Protocol Reconciliation** — [docs/quests/reconcile-forge-bootstrap-protocol.md](quests/reconcile-forge-bootstrap-protocol.md) — supporting architectural ledger; not a separate active implementation lane while Stage 2 execution flow is unfinished
 - Phase 4: Perpetuals — frontend complete, awaiting contracts
 
 **📦 Ready to Deploy:**
@@ -111,13 +115,24 @@ Implement all TypeScript back-end modules the CFMM frontend depends on.
 - [x] `PUZZLE_REVEALS` registry with clear "compile first" error messages
 
 **Pending (connect frontend)** — ⚠️ **BLOCKED:** Rue contracts need compilation fixes
-- [ ] **Compile Rue contracts** — `rue build contracts/pool_singleton.rue` + `lp_nft.rue`; fill `PUZZLE_REVEALS` in spendBundles.ts
+- [ ] **Compile Rue contracts** — `rue build contracts/pool_singleton_n_fixed.rue` + `lp_nft.rue`; fill `PUZZLE_REVEALS` in spendBundles.ts
 - [ ] Build `PoolStats.tsx` — reserves, K invariant, current price, 24h volume
 - [ ] Build `SwapForm.tsx` — token in/out with estimated output and price impact; wire `buildSwapBundle`
 - [ ] Build `LiquidityForm.tsx` — add/remove liquidity, show LP NFT balance; wire deposit/withdraw bundles
 - [ ] Build `SplitLpModal.tsx` — split LP position; wire `buildSplitLpBundle`
 - [ ] Real `poolIndexer.ts` — replace mock with WalletConnect getPublicKeys → pool coin fetch; populate `currentPuzzleReveal` + `lineageProof`
 - [ ] Display pool singleton coin on Spacescan testnet11
+
+### Forge Focus — Stage 2 Bootstrap
+
+- [x] Truthful Stage-1 launcher deployment flow in Forge
+- [x] Adaptive Stage-2 batch planner in the GUI
+- [x] Persist batch launcher history across refreshes
+- [x] Persist launcher parent coin info and render launcher history outside the planner card
+- [x] First-pass CLVM benchmark: adaptive 5x2 route vs single 10-asset `pool_singleton_n_fixed` candidate
+- [x] Simulator-first end-to-end launcher-to-bootstrap probe for `pool_singleton_n_fixed` across 2-10 assets
+- [x] Direct launcher path prototype targeting `pool_singleton_n_fixed`
+- [x] Freeze one canonical Stage-2 target before reopening adjacent Forge quests
 
 ---
 
@@ -392,6 +407,52 @@ After testnet proofs are live:
   - Math library complete (`vaultBalancer.ts` — 18 KB with all vault math)
   - Project scaffold ready (`projects/chia-vaults/` on localhost:5178)
   - Enhancements backlogged: [enhance-vault-balancer-system.md](quests/backlog/enhance-vault-balancer-system.md)
+- ✅ **2026-03-07** — Forge GUI testnet deployment: stage-1 launcher spell cast
+  - Quest: [frontend-gui-pool-deployment.md](quests/frontend-gui-pool-deployment.md) remains active for stage 2
+  - Sage WalletConnect accepted the launcher with `status: 1, error: null`
+  - Launcher id recorded: `0104a3cb0cee7221294cf5028140a112aaf61cd580bfb7825ab438f65be6e297`
+  - Derived singleton eve coin ids recorded for pool and DAO shells
+  - Follow-up spell backlogged: [enhance-forge-liquidity-bootstrap.md](quests/backlog/enhance-forge-liquidity-bootstrap.md)
+- ✅ **2026-03-07** — Forge Stage 2 Bootstrap foundation complete
+  - Quest: [forge-stage2-bootstrap.md](quests/done/forge-stage2-bootstrap.md) moved to done/
+  - Canonical target frozen on `pool_singleton_n_fixed` for 2-10 assets
+  - Standard singleton launcher path, persistent launcher history, and launcher parent metadata all wired through Forge
+  - Follow-up spell activated: [forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md)
+- ✅ **2026-01-15** — 🚀 CFMM Infrastructure Quest ✅ COMPLETE (100%)
+  - Quest: [cfmm-deployment-infrastructure.md](quests/done/cfmm-deployment-infrastructure.md) moved to done/
+  - Sage RPC integration: Live Sage wallet connection (mTLS on 127.0.0.1:9257) 
+  - Contract compilation: 6/6 Rue contracts compiled to CLVM (17KB total)
+  - Pool configuration: 3 pools prepared (TXCH/Test1, Test1/Test2, TXCH+Test1+Test2+Test3)
+  - Deployment pipeline: 4 deployment approaches + live transaction demonstration
+  - Status doc: [DEPLOYMENT_STATUS.md](../projects/chia-cfmm/DEPLOYMENT_STATUS.md) with full infrastructure summary
+
+---
+
+## 🎨 Frontend Enhancement Queue — "Juice Up UI/UX"
+
+### Three.js Integration (chia-cfmm) — 3D DeFi Experience
+**Status:** BACKLOG  
+**Prerequisites:** Current chia-cfmm foundation ✅ COMPLETE
+**Target:** Future-proof for Arcane BOW in-game integration
+
+**Phase 1: Foundation Setup**
+- [ ] Install Three.js ecosystem: `three @types/three @react-three/fiber @react-three/drei @react-three/postprocessing`
+- [ ] Create `src/components/three/` — 3D component library
+- [ ] Configure Vite for Three.js optimization (bundle splitting, WASM support)
+
+**Phase 2: Strategic Implementation**  
+- [ ] **LP NFT Visualization** (LpNftCard.tsx) — 3D rotating NFT cards with depth/lighting
+- [ ] **Pool Statistics** (PoolStats.tsx) — 3D bar/pie charts, animated asset flows
+- [ ] **Background Ambience** — Subtle 3D particles matching Radix UI theme
+- [ ] **Pool Creation Preview** (PoolCreationPanel.tsx) — 3D asset weight visualization
+
+**Phase 3: Gaming Integration Prep**
+- [ ] **Asset-Game Bridge** — Shared 3D models for DeFi ↔ Arcane BOW  
+- [ ] **Battle-Worthy Assets** — LP positions as 3D weapons/artifacts
+- [ ] **Performance Optimization** — Mobile-first 3D with 2D fallbacks
+- [ ] **Cross-App Library** — Share components with bow-app project
+
+**Implementation Strategy:** Toggle 2D/3D modes, progressive enhancement, maintain current UX
 
 ---
 
@@ -405,4 +466,4 @@ After testnet proofs are live:
 
 ---
 
-_Last updated: 2026-03-06_
+_Last updated: 2026-01-15_

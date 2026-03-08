@@ -162,7 +162,7 @@ Each frontend needs a `vercel.json`:
 ## 🚀 CI/CD Pipeline
 
 ### GitHub → Vercel
-1. Install Vercel GitHub App on `aWizardeth/aWizard-Familiar`
+1. Install Vercel GitHub App on `aWizardxch/aWizard-Familiar`
 2. Link projects:
    - `projects/chia-cfmm/` → forge.awizard.dev
    - `projects/chia-craft/` → craft.awizard.dev

@@ -180,6 +180,8 @@ User message received
 | `docs/IN_DEVELOPMENT.md`           | Active work log                    |
 | `docs/IDEAS.md`                     | Brainstorm & future features       |
 | `docs/ARCHITECTURE.md`             | Hosting, auth & deployment design  |
+| `docs/ARCHITECTURE_INDEX.md`       | Architecture doc router by topic   |
+| `docs/skills/README.md`            | Skill library index                |
 | `src/components/WizardChat.tsx`    | Chat panel component               |
 | `src/lib/api.ts`                    | API client for bot communication   |
 
@@ -200,6 +202,8 @@ aWizard draws on a library of skill files in `docs/skills/` for deep domain refe
 | `deploymentInfra.md`              | Vercel/VPS topology, CI/CD, secret separation        |
 | `projectArchitecture.md`          | Module map, naming conventions, brick-by-brick       |
 | `blockchainDecentralization.md`   | Chia primitives, transparency revolution, trustless  |
+| `chiaDevTooling.md`               | Chia docs hub, tracing tools, RPC utilities, ops     |
+| `chiaPrimitivesPatterns.md`       | Singletons, CAT issuance, CR-CATs, secure-the-bag    |
 | `bowAppReference.md`              | **Live code** — WalletConnect/CHIP-0002, state channel lifecycle, commit-reveal battle protocol, Fighter/Tier types, TrackerClient, BattleState, gotchas |
 | `snesWorldEngine.md`              | SNES-style chunk world, biomes, procedural gen, NPC/quest systems, Godot web export, encounter→battle bridge |
 | `networkGameplayUX.md`            | Spell-cast UX pattern, `useSpellCast` hook, arcane loaders, WebSocket battles, chain tx progress, curse error messages |

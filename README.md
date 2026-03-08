@@ -18,7 +18,7 @@ This repository contains the **agent brain** — specialized VS Code agent confi
 ## Quick Setup
 
 ```bash
-git clone https://github.com/aWizardeth/aWizard-Familiar.git
+git clone https://github.com/aWizardxch/aWizard-Familiar.git
 cd aWizard-Familiar
 code .
 ```
