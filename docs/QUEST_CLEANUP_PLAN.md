@@ -1,11 +1,10 @@
 # Quest Status Review — March 6, 2026
 
-## 📋 Active Quests (6 total)
+## 📋 Active Quests (5 total)
 
 | Quest File | Title | Status | % Complete | Action Needed |
 |------------|-------|--------|-----------|---------------|
 | `deploy-testnet-infrastructure.md` | Testnet11 Deployment & Infrastructure | ⚡ IN PROGRESS | 25% (Step 1-2 done) | **Keep active** — actively working |
-| `build-vault-balancer-system.md` | Vault Balancer System | 🟡 Foundation Done | 20% (Phase 1-2 done) | **Keep active** — needs Phase 3-10 |
 | `build-bank-of-wizards.md` | Bank of Wizards (full build) | 🔴 Not Started | 0% | **Decision needed** — 684 lines, detailed plan |
 | `bootstrap-aggregator-dex.md` | Aggregator DEX | 🔴 Not Started | 0% | **Decision needed** — research phase |
 | `bootstrap-portal-arbitrage.md` | Portal Arbitrage | 🔴 Not Started | 0% | **Decision needed** — research phase |
@@ -42,7 +41,7 @@
 
 ### Keep Active (Continue Work)
 1. ✅ **deploy-testnet-infrastructure.md** — IN PROGRESS (Step 2/8 complete)
-2. ✅ **build-vault-balancer-system.md** — Foundation done (Phase 2/10 complete)
+2. ✅ **build-liquidity-manager-system.md** — Moved to backlog until LP deployment quests complete
 
 ### Move to TODO List (Not Ready)
 These quests are **not started** and should remain as planning documents:
@@ -61,7 +60,7 @@ These quests are **not started** and should remain as planning documents:
 
 **Already Tracked:**
 - ✅ Deployment Quest (Step 2 just completed)
-- ✅ Phase 10 — Vault Balancer (20% complete)
+- ✅ Phase 10 — Liquidity Manager (20% complete, deferred)
 
 **Should Add:**
 - **Phase 8 — Aggregator DEX** → Already listed but not actively worked
@@ -103,7 +102,7 @@ Delete quest files and consolidate plans into TODO_DEFI.md phases.
    - Recommend: Bank full build, Aggregator DEX, Portal, Multisig
 
 3. **Which quests should stay active?**
-   - Recommend: Deployment (25%), Vault Balancer (20%)
+   - Recommend: Deployment (25%)
 
 4. **Should we update TODO_DEFI.md to mark scaffolds complete?**
    - Yes — Phase 6 (Bank scaffold) is done

@@ -42,7 +42,7 @@ Bank of Wizards
 
 ### Data Sources
 - Wallet coins via `chip0002_getAssetCoins`
-- LP NFT positions via `chip0002_getNFTs` filtered by collection
+- LP NFT positions via `chip0002_getNFTs` filtered by collection after the LP NFT standard-migration quest lands; current Forge LP ownership remains on a legacy custom position path and is not yet wallet-standard
 - Forge pool state via pool singleton coin reads
 - Perpetuals positions via account singleton reads
 
@@ -187,7 +187,7 @@ Wizard Continent
 └── 🏘 Community Builds    (expandable edges)
 ```
 
-Walking into a location loads that subdomain's UI in an iframe/panel. Entering The Forge opens `forge.awizard.dev`. Powered by `map.awizard.dev` — built on the SNES world engine (see `docs/skills/snesWorldEngine.md`).
+Walking into a location loads that subdomain's UI in an iframe/panel. Entering The Forge opens `forge.awizard.dev`. Powered by `map.awizard.dev` — for skill routing start with `docs/skills/README.md`, then use `docs/skills/snesWorldEngine.md` for the world-engine specifics.
 
 ---
 
@@ -208,7 +208,7 @@ Lock on Base → mint CAT on Chia. Burn CAT on Chia → release on Base.
 ## 🏰 nightspire.awizard.dev — The Nightspire
 
 Discord Activity — Arcane BOW game. The wizard's realm inside Discord.  
-Built on `projects/awizard-gui/`. See `docs/skills/discordActivityAuth.md`.
+Built on `projects/awizard-gui/`. Start with `docs/ARCHITECTURE_INDEX.md` for architecture routing and `docs/skills/README.md` for skill routing, then open `docs/skills/discordActivityAuth.md` for the auth-specific flow.
 
 ---
 

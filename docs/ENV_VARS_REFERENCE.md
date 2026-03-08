@@ -104,10 +104,11 @@ These variables are **identical across all frontends**:
 | `VAULT_INDEXER_UPSTREAM_URL` | `https://vault-indexer.awizard.dev/api/vaults` | ⬜ Server | Server-side merged vault singleton + oracle feed |
 | `VAULT_REGISTRY_URL` | `https://vault-indexer.awizard.dev/api/vault-registry` | ⬜ Server | Deployed vault singleton registry feed |
 | `VAULT_ORACLE_URL` | `https://oracle.awizard.dev/api/prices` | ⬜ Server | Oracle price feed merged by `/api/vaults` |
+| `VAULT_SIMPLE_MODE` | `true` | ⬜ Server | Serve a simple preview XCH/LOVE vault from `/api/vaults` when no live backend is configured |
 
 **`.env.example` Status:** ✅ Up to date
 
-**Backend note:** `projects/chia-vaults/api/vaults.ts` now expects one real upstream source: either `VAULT_INDEXER_UPSTREAM_URL`, or both `VAULT_REGISTRY_URL` and `VAULT_ORACLE_URL`. If none are set, the route returns `503` and the frontend falls back to local mock data.
+**Backend note:** `projects/chia-vaults/api/vaults.ts` first prefers a real upstream source: either `VAULT_INDEXER_UPSTREAM_URL`, or both `VAULT_REGISTRY_URL` and `VAULT_ORACLE_URL`. If none are set and `VAULT_SIMPLE_MODE` is not `false`, the route serves a simple preview vault payload with signer-policy metadata. Set `VAULT_SIMPLE_MODE=false` to force a `503` instead.
 
 ---
 

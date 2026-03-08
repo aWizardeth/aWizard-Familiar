@@ -1,7 +1,8 @@
 # TODO — aWizard Protocol (DeFi Ecosystem)
 
 > Master quest log for the full aWizard DeFi build.
-> Architecture: `docs/ARCHITECTURE.md` — full subdomain map + product specs.
+> Start with `docs/ARCHITECTURE_INDEX.md` for architecture routing, then use `docs/ARCHITECTURE.md` for the full subdomain map + product specs.
+> Start with `docs/skills/README.md` for skill routing before opening individual domain skills.
 > Projects live in `projects/` — `projects/chia-cfmm/`, `projects/chia-treasure-chest/`, `projects/chia-perps/`
 >
 > **Subdomain targets:** `forge.awizard.dev` (CFMM + NFT vaults), `portal.awizard.dev` (arbitrage),
@@ -19,16 +20,19 @@
 - Phase 5: **Emoji Market** ([craft.awizard.dev](http://localhost:5183)) — 6 core tokens ✅
 - Phase 6: **Bank of Wizards** ([bank.awizard.dev](http://localhost:5184)) — Portfolio aggregation MVP ✅
 - Phase 7: **Analytics Hub** ([stats.awizard.dev](http://localhost:5185)) — Ecosystem metrics ✅
-- Phase 10: **Vault Balancer** ([vaults.awizard.dev](http://localhost:5178)) — Foundation complete (math + scaffold) ✅
+- Phase 10: **Liquidity Manager** ([vaults.awizard.dev](http://localhost:5178)) — Foundation complete; optional post-launch liquidity-management layer ✅
 
 **✅ Just Completed:**
 - **🚀 CFMM Infrastructure Quest** — Sage RPC + 6 contracts + 3 pools + deployment pipeline ✅
 
 **🚧 In Progress:**
 - **🚀 Deployment Quest** — Testnet11 infrastructure (CFMM foundation complete — 40%)
+- **🔐 Cloud Vault + Multisig Pivot** — optional future strategy layer; not required for initial Forge CFMM launch
 - Phase 1: Wallet Connect — integration ready, awaiting testnet wallet testing  
 - **🪄 Forge Stage 2 Execution Flow** — [docs/quests/forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md) — active; Forge now builds the full liquidity bootstrap bundle, next work is fresh testnet11 validation of the companion-spend path
 - **🧩 Forge Bootstrap Protocol Reconciliation** — [docs/quests/reconcile-forge-bootstrap-protocol.md](quests/reconcile-forge-bootstrap-protocol.md) — supporting architectural ledger; not a separate active implementation lane while Stage 2 execution flow is unfinished
+- **🪪 Forge LP NFT Standard Migration** — [docs/quests/forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) — active; Sage-native LP receipt mint now succeeds on testnet11 and Forge recovers the LP card from local history, next work is making the wallet NFT metadata rich enough for full wallet-indexed LP discovery
+  - sequencing rule: use current NFT1-compatible wallet standards first; only open a longer custom-CHIP + wallet-PR quest if NFT1 cannot safely carry LP ownership semantics
 - Phase 4: Perpetuals — frontend complete, awaiting contracts
 
 **📦 Ready to Deploy:**
@@ -39,7 +43,8 @@
 - `chia-stats` → localhost:5185
 
 **📋 Planning Backlog:**
-- Future quests moved to `docs/quests/backlog/` (full Bank build, Aggregator DEX, Portal, Multisig)
+- Future quests moved to `docs/quests/backlog/` (full Bank build, Aggregator DEX, Portal, Multisig, upgradeable treasury wallet)
+- Near-term treasury operations can continue on a simple Sage address until the treasury wallet quest is activated
 
 ---
 
@@ -332,16 +337,18 @@ Market balancer — detects price mismatches, routes arbitrage bundles.
 
 ---
 
-### Phase 10 — Vault Balancer (Auto-Rebalancing Vaults) ✅ FOUNDATION COMPLETE
+### Phase 10 — Liquidity Manager (Auto-Rebalancing Strategy Layer) ✅ FOUNDATION COMPLETE
 
-**Quest:** [docs/quests/done/build-vault-balancer-system.md](quests/done/build-vault-balancer-system.md) ✅  
-**Enhancements:** [docs/quests/backlog/enhance-vault-balancer-system.md](quests/backlog/enhance-vault-balancer-system.md) (backlog)  
+**Quest:** [docs/quests/done/build-liquidity-manager-system.md](quests/done/build-liquidity-manager-system.md) ✅  
+**Enhancements:** [docs/quests/backlog/enhance-liquidity-manager-system.md](quests/backlog/enhance-liquidity-manager-system.md) (backlog)  
 **Project:** [projects/chia-vaults/](../projects/chia-vaults/)  
 **Status:** Foundation delivered (30%), contracts + frontend deferred
 
-Automated liquidity management vaults for CFMM pools and Treasure Chests — Chia's equivalent
-of Aftermath afLP vaults. Community-owned singletons that provide passive market making with
-automated rebalancing based on oracle prices.
+**Current sequencing:** defer active liquidity-manager implementation until LP deployment quests are complete, then use live pool behavior to decide the remaining balancing mechanics.
+
+Automated liquidity management strategies for CFMM pools and Treasure Chests — Chia's equivalent
+of Aftermath afLP strategy UX. This is an optional post-launch layer for automated balancing,
+not a required custody system for initial CFMM launch.
 
 **✅ Delivered (Foundation Complete):**
 - [x] Quest specification with full Aftermath afLP reference (900+ lines) ✅
@@ -357,13 +364,15 @@ automated rebalancing based on oracle prices.
 - [x] Dev server ready on **localhost:5178** ✅
 
 **📦 Deferred to Backlog (70% remaining):**
-- Rue smart contracts (`aflp_vault.rue`, `chest_vault.rue`, `vault_share.rue`)
+- Optional shared-strategy deposit accounting
 - Frontend UI (VaultDashboard, DepositFlow, WithdrawFlow, RebalanceMonitor)
-- Spend bundle builders for contract interactions
+- Spend bundle builders for manager interactions
 - Oracle integration (Dexie, Tibetswap, CFMM price feeds)
-- Vault indexer for live state queries
-- Testnet deployments (CFMM vault + Chest vault)
-- CHIP documentation & submission
+- Manager indexer for live state queries
+- Testnet deployment for XCH/LOVE liquidity manager
+- CHIP documentation & submission if the pattern proves reusable
+
+**Re-entry condition:** return here after LP deployment quests finish and the team has real pool-state feedback about drift, keeper cadence, and which balancing actions should be automatic.
 
 ---
 
@@ -378,7 +387,7 @@ After testnet proofs are live:
 - [ ] Perps CHIP-B: Perpetual Futures Position Standard
 - [ ] Perps CHIP-C: Oracle Aggregation Standard
 - [ ] Perps CHIP-D: Permissionless Vault Standard
-- [ ] Vault Balancer CHIP — Auto-Rebalancing Liquidity Vault Standard (Informational)
+- [ ] Liquidity Manager CHIP — Auto-Rebalancing Strategy Standard (Informational)
 
 ---
 
@@ -394,19 +403,19 @@ After testnet proofs are live:
 - ✅ **2026-03-05** — Phase 4c: `chia-perps/MarketsTab.tsx` built with markets display ✅ MARKETS TAB COMPLETE
 - ✅ **2026-03-05** — World Engine: `awizard-gui/` Phaser 3 tile renderer + world foundation ✅ BOOTSTRAP WORLD COMPLETE
 - ✅ **2026-03-05** — Sage CHIP-0002 method list documented in `/memories/chia-ecosystem.md`
-- ✅ **2026-03-05** — Phase 10: Vault Balancer Foundation (Phases 1-2) ✅ MATH LIBRARY + QUEST DOC COMPLETE
-  - Quest: `build-vault-balancer-system.md` (900+ lines, contract flows, full spec)
-  - Math library: `chia-vaults/src/lib/vaultBalancer.ts` (600+ lines, all vault math)
+- ✅ **2026-03-05** — Phase 10: Liquidity Manager Foundation (Phases 1-2) ✅ MATH LIBRARY + QUEST DOC COMPLETE
+  - Quest: `build-liquidity-manager-system.md` (900+ lines, contract flows, full spec)
+  - Math library: `chia-vaults/src/lib/vaultBalancer.ts` (600+ lines, all liquidity-manager math)
   - Project scaffold: `chia-vaults/` ready for contract development
 - ✅ **2026-03-06** — Phase 6: Bank of Wizards MVP ✅ FOUNDATION COMPLETE
   - Quest: [build-bank-of-wizards.md](quests/done/build-bank-of-wizards.md) moved to done/
   - Core aggregation engine (60% complete) — net worth, assets, LP positions
   - Enhancements backlogged: [enhance-bank-of-wizards.md](quests/backlog/enhance-bank-of-wizards.md)
-- ✅ **2026-03-06** — Phase 10: Vault Balancer Foundation ✅ COMPLETE (30%)
-  - Quest: [build-vault-balancer-system.md](quests/done/build-vault-balancer-system.md) moved to done/
-  - Math library complete (`vaultBalancer.ts` — 18 KB with all vault math)
+- ✅ **2026-03-06** — Phase 10: Liquidity Manager Foundation ✅ COMPLETE (30%)
+  - Quest: [build-liquidity-manager-system.md](quests/done/build-liquidity-manager-system.md) moved to done/
+  - Math library complete (`vaultBalancer.ts` — 18 KB with all liquidity-manager math)
   - Project scaffold ready (`projects/chia-vaults/` on localhost:5178)
-  - Enhancements backlogged: [enhance-vault-balancer-system.md](quests/backlog/enhance-vault-balancer-system.md)
+  - Enhancements backlogged: [enhance-liquidity-manager-system.md](quests/backlog/enhance-liquidity-manager-system.md)
 - ✅ **2026-03-07** — Forge GUI testnet deployment: stage-1 launcher spell cast
   - Quest: [frontend-gui-pool-deployment.md](quests/frontend-gui-pool-deployment.md) remains active for stage 2
   - Sage WalletConnect accepted the launcher with `status: 1, error: null`
@@ -418,6 +427,12 @@ After testnet proofs are live:
   - Canonical target frozen on `pool_singleton_n_fixed` for 2-10 assets
   - Standard singleton launcher path, persistent launcher history, and launcher parent metadata all wired through Forge
   - Follow-up spell activated: [forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md)
+- ✅ **2026-03-08** — Forge LP NFT standard-migration comparison path crossed the Sage-native mint boundary
+  - Quest: [forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) remains active
+  - `chia_bulkMintNfts` is now wired through Forge with explicit DID configuration and a Sage-acceptable minimal payload
+  - Sage successfully minted a wallet-visible native LP receipt on testnet11 and returned `nftIds`
+  - Forge now preserves Sage `nftIds`, records native LP wallet ids in adaptive Stage-2 history, and shows a recovered fallback LP card instead of dropping the position
+  - Remaining blocker: the native receipt still lacks collection/metadata richness, so Forge has not yet upgraded that fallback card into a fully wallet-indexed LP position
 - ✅ **2026-01-15** — 🚀 CFMM Infrastructure Quest ✅ COMPLETE (100%)
   - Quest: [cfmm-deployment-infrastructure.md](quests/done/cfmm-deployment-infrastructure.md) moved to done/
   - Sage RPC integration: Live Sage wallet connection (mTLS on 127.0.0.1:9257) 
@@ -461,7 +476,7 @@ After testnet proofs are live:
 - **Cross-collateral margin**: use CFMM LP NFTs as collateral in the perps account singleton
 - **Insurance fund mining**: emit reward CATs to liquidators proportional to bad debt covered
 - **Referral codes**: builder fee split (like Aftermath's builder codes) — route % to a referrer coin
-- **Multi-vault strategies**: vault-of-vaults that allocates to multiple afLP vaults based on APY
+- **Multi-manager strategies**: strategy-of-strategies that allocates to multiple liquidity managers based on APY
 - **Yield tokenization**: split vault shares into principal + yield tokens (Pendle-style)
 
 ---

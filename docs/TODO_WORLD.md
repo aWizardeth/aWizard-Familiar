@@ -9,7 +9,8 @@
 > Quests marked **[BE]** are back-end-only.
 > Quests marked **[SYNC]** need both sides before going live.
 >
-> Skills: `snesWorldEngine.md`, `networkGameplayUX.md`, `nightspireTheme.md`
+> Start with `docs/skills/README.md` for the skill index, then open `snesWorldEngine.md`, `networkGameplayUX.md`, and `nightspireTheme.md`.
+> Use `docs/ARCHITECTURE_INDEX.md` first if the work needs product or system-level architecture context.
 
 ---
 

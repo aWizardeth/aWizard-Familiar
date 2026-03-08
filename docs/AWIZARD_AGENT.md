@@ -93,6 +93,8 @@ docs/quests/
 
 **Pattern established:** March 6, 2026 — 2 quests completed in 40 minutes using this workflow.
 
+**Start with indexes:** `docs/skills/README.md` and `docs/ARCHITECTURE_INDEX.md`
+
 **Full documentation:** `docs/skills/questManagement.md`
 
 ---

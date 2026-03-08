@@ -483,7 +483,7 @@ You just completed a quest that was stalled for weeks. 🎉
 ---
 
 **Pattern established:** 2026-03-06  
-**Example quests:** Bank of Wizards (60%), Vault Balancer (30%)  
+**Example quests:** Bank of Wizards (60%), Liquidity Manager (30%)  
 **Velocity:** 2 quests completed in 20 minutes each  
 **Future work:** 2 enhancement backlogs created (8-12 hours each)
 

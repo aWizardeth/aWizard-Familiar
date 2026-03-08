@@ -194,6 +194,8 @@ Context.
 
 ## 📚 Full Documentation
 
+- **Skill index first:** `docs/skills/README.md`
+- **Architecture index first:** `docs/ARCHITECTURE_INDEX.md`
 - **Detailed workflow:** `docs/skills/questManagement.md`
 - **Backlog README:** `docs/quests/backlog/README.md`
 - **Done folder README:** `docs/quests/done/README.md`
