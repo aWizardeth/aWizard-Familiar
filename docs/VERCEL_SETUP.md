@@ -367,4 +367,4 @@ git diff HEAD^ HEAD --quiet projects/chia-cfmm/
 **Next Steps:**
 - Complete [WALLETCONNECT_SETUP.md](./WALLETCONNECT_SETUP.md) to get Project ID
 - Complete [RAILWAY_SETUP.md](./RAILWAY_SETUP.md) for gym-server backend
-- Update [docs/quests/deploy-testnet-infrastructure.md](./quests/deploy-testnet-infrastructure.md) with completion status
+- Update [docs/quests/backlog/deploy-testnet-infrastructure.md](./quests/backlog/deploy-testnet-infrastructure.md) with completion status when the deployment lane is reactivated

@@ -243,7 +243,7 @@ All contract deployments require funded testnet11 wallets:
 
 ## 📖 Deployment Runbook
 
-See [docs/quests/deploy-testnet-infrastructure.md](docs/quests/deploy-testnet-infrastructure.md) for step-by-step deployment guide.
+See [docs/quests/backlog/deploy-testnet-infrastructure.md](docs/quests/backlog/deploy-testnet-infrastructure.md) for the parked step-by-step deployment guide.
 
 **Status Tracker:**
 - ✅ Step 1: Domain & Hosting Setup (Planning complete)

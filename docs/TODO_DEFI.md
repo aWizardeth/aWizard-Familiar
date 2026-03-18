@@ -24,15 +24,17 @@
 
 **✅ Just Completed:**
 - **🚀 CFMM Infrastructure Quest** — Sage RPC + 6 contracts + 3 pools + deployment pipeline ✅
+- **🧾 Forge Fee + Env Alignment** — on-chain protocol fee curried into the canonical n-asset pool, fee UI/env defaults aligned, `.env` restored as the single active operator config ✅
 
 **🚧 In Progress:**
-- **🚀 Deployment Quest** — Testnet11 infrastructure (CFMM foundation complete — 40%)
+- **🪙 Forge LP CAT Ownership Pivot** — [docs/quests/forge-lp-cat-ownership-pivot.md](quests/forge-lp-cat-ownership-pivot.md) — active; protocol-fee and truth-boundary cleanup landed, next work is still pool-authoritative LP CAT mint/burn semantics plus CAT-backed withdraw validation
+- **🧊 Forge LP NFT Standard Migration** — [docs/quests/forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) — frozen prototype; retain this as reusable wallet-visible NFT receipt/container infrastructure for Treasure Chest and future NFT-native lanes
 - **🔐 Cloud Vault + Multisig Pivot** — optional future strategy layer; not required for initial Forge CFMM launch
 - Phase 1: Wallet Connect — integration ready, awaiting testnet wallet testing  
-- **🪄 Forge Stage 2 Execution Flow** — [docs/quests/forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md) — active; Forge now builds the full liquidity bootstrap bundle, next work is fresh testnet11 validation of the companion-spend path
-- **🧩 Forge Bootstrap Protocol Reconciliation** — [docs/quests/reconcile-forge-bootstrap-protocol.md](quests/reconcile-forge-bootstrap-protocol.md) — supporting architectural ledger; not a separate active implementation lane while Stage 2 execution flow is unfinished
-- **🪪 Forge LP NFT Standard Migration** — [docs/quests/forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) — active; Sage-native LP receipt mint now succeeds on testnet11 and Forge recovers the LP card from local history, next work is making the wallet NFT metadata rich enough for full wallet-indexed LP discovery
-  - sequencing rule: use current NFT1-compatible wallet standards first; only open a longer custom-CHIP + wallet-PR quest if NFT1 cannot safely carry LP ownership semantics
+- **🪄 Forge Stage 2 Execution Flow** — [docs/quests/forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md) — active; protocol-fee pool state and corrected fee accounting are now shipped, next work is one fresh testnet11 create + bootstrap replay against the new pool hash with reserve-companion evidence capture
+- **📦 Deployment Quest** — [docs/quests/backlog/deploy-testnet-infrastructure.md](quests/backlog/deploy-testnet-infrastructure.md) — backlogged; infra follow-through remains useful but is not the current Forge ownership lane
+- **🧩 Forge Bootstrap Protocol Reconciliation** — [docs/quests/backlog/reconcile-forge-bootstrap-protocol.md](quests/backlog/reconcile-forge-bootstrap-protocol.md) — backlogged architectural ledger; no longer a separate active implementation lane
+- **🖥️ Forge GUI Truth Lane** — [docs/quests/backlog/frontend-gui-pool-deployment.md](quests/backlog/frontend-gui-pool-deployment.md) — backlogged post-deploy UX verification lane
 - Phase 4: Perpetuals — frontend complete, awaiting contracts
 
 **📦 Ready to Deploy:**
@@ -45,6 +47,20 @@
 **📋 Planning Backlog:**
 - Future quests moved to `docs/quests/backlog/` (full Bank build, Aggregator DEX, Portal, Multisig, upgradeable treasury wallet)
 - Near-term treasury operations can continue on a simple Sage address until the treasury wallet quest is activated
+
+## 🔮 Next Session Focus
+
+1. **Forge protocol-fee replay**
+  - create one fresh 2-asset testnet11 pool using the new `pool_singleton_n_fixed` hash
+  - confirm launcher id, target/state coin id, and reserve-companion evidence on-chain
+  - record whether the protocol treasury output appears as expected on swap-ready pools
+2. **Forge GUI truth proof**
+  - reload the fresh pool from recorded anchors
+  - run one tiny post-deploy action against that reloaded pool
+  - capture tx id, pool anchors, and whether reserve display remains truthful after the action
+3. **LP CAT ownership continuation**
+  - move from operator-style LP CAT bootstrap to pool-authoritative mint/burn semantics
+  - validate CAT-backed withdraw path and document the winning witness model
 
 ---
 
@@ -256,9 +272,9 @@ Unified analytics dashboard — ecosystem observability layer with metrics, char
 
 ---
 
-### 🚀 Deployment Quest — Testnet11 Infrastructure ⚡ IN PROGRESS
+### 🚀 Deployment Quest — Testnet11 Infrastructure 📦 BACKLOG
 
-**Quest Doc:** [docs/quests/deploy-testnet-infrastructure.md](quests/deploy-testnet-infrastructure.md)  
+**Quest Doc:** [docs/quests/backlog/deploy-testnet-infrastructure.md](quests/backlog/deploy-testnet-infrastructure.md)  
 **Deployment Map:** [docs/DEPLOYMENT_MAP.md](DEPLOYMENT_MAP.md)  
 **Setup Guides:** [WALLETCONNECT_SETUP.md](WALLETCONNECT_SETUP.md) | [VERCEL_SETUP.md](VERCEL_SETUP.md) | [RAILWAY_SETUP.md](RAILWAY_SETUP.md) | [ENV_VARS_REFERENCE.md](ENV_VARS_REFERENCE.md)
 
@@ -417,7 +433,7 @@ After testnet proofs are live:
   - Project scaffold ready (`projects/chia-vaults/` on localhost:5178)
   - Enhancements backlogged: [enhance-liquidity-manager-system.md](quests/backlog/enhance-liquidity-manager-system.md)
 - ✅ **2026-03-07** — Forge GUI testnet deployment: stage-1 launcher spell cast
-  - Quest: [frontend-gui-pool-deployment.md](quests/frontend-gui-pool-deployment.md) remains active for stage 2
+  - Quest: [frontend-gui-pool-deployment.md](quests/backlog/frontend-gui-pool-deployment.md) moved to backlog after the LP CAT ownership pivot reprioritized CFMM work
   - Sage WalletConnect accepted the launcher with `status: 1, error: null`
   - Launcher id recorded: `0104a3cb0cee7221294cf5028140a112aaf61cd580bfb7825ab438f65be6e297`
   - Derived singleton eve coin ids recorded for pool and DAO shells
@@ -428,11 +444,19 @@ After testnet proofs are live:
   - Standard singleton launcher path, persistent launcher history, and launcher parent metadata all wired through Forge
   - Follow-up spell activated: [forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md)
 - ✅ **2026-03-08** — Forge LP NFT standard-migration comparison path crossed the Sage-native mint boundary
+  - Quest: [forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) is now frozen as prototype-complete infrastructure for Treasure Chest and future NFT-native lanes
+  - Active CFMM ownership pivot: [forge-lp-cat-ownership-pivot.md](quests/forge-lp-cat-ownership-pivot.md)
   - Quest: [forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) remains active
   - `chia_bulkMintNfts` is now wired through Forge with explicit DID configuration and a Sage-acceptable minimal payload
   - Sage successfully minted a wallet-visible native LP receipt on testnet11 and returned `nftIds`
   - Forge now preserves Sage `nftIds`, records native LP wallet ids in adaptive Stage-2 history, and shows a recovered fallback LP card instead of dropping the position
   - Remaining blocker: the native receipt still lacks collection/metadata richness, so Forge has not yet upgraded that fallback card into a fully wallet-indexed LP position
+- ✅ **2026-03-17** — Forge protocol fee + operator env cleanup foundation delivered
+  - `pool_singleton_n_fixed.rue` now retains LP fee in reserves correctly and curries `protocol_fee_ppm` plus `protocol_puzzle_hash` into the pool state
+  - Forge frontend quote and stats surfaces now distinguish LP fee, protocol fee, DAO fee, and frontend platform fee
+  - Network-aware treasury defaults now exist in code for mainnet and testnet11, while `.env` remains the single active local operator config
+  - `.env.example` was updated into a real placeholder template and `.env.testnet` now reflects the current fee-routing story
+  - Next proof spell: fresh testnet11 pool replay against the new canonical pool hash, then one post-deploy pool action
 - ✅ **2026-01-15** — 🚀 CFMM Infrastructure Quest ✅ COMPLETE (100%)
   - Quest: [cfmm-deployment-infrastructure.md](quests/done/cfmm-deployment-infrastructure.md) moved to done/
   - Sage RPC integration: Live Sage wallet connection (mTLS on 127.0.0.1:9257) 
@@ -481,4 +505,4 @@ After testnet proofs are live:
 
 ---
 
-_Last updated: 2026-01-15_
+_Last updated: 2026-03-17_
