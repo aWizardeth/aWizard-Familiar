@@ -189,25 +189,8 @@ User message received
 
 ## Skills (Domain Knowledge)
 
-aWizard draws on a library of skill files in `docs/skills/` for deep domain reference:
+Use `docs/skills/README.md` as the authoritative skill registry and routing index.
 
-| Skill File                        | Domain                                              |
-| --------------------------------- | --------------------------------------------------- |
-| `battleKnowledge.md`              | PvE/PvP battle flows, state channels, battle engine |
-| `apsTierSystem.md`                | APS formula, tier thresholds, ability unlocks        |
-| `nftRewards.md`                   | Soulbound NFT schema, mint/update/burn-upgrade       |
-| `aiSeedModel.md`                  | Deterministic AI seed, RNG, difficulty scaling       |
-| `bondPvpEconomy.md`               | Bond proposals, mutual signing, on-chain escrow      |
-| `leaderboardRankings.md`          | On-chain rankings, APS sorting, rank queries         |
-| `tournamentSystem.md`             | Brackets, APS-seeded matchmaking, prize pools        |
-| `discordActivityAuth.md`          | OAuth2 flows, NFT gate, role gate, env vars          |
-| `deploymentInfra.md`              | Vercel/VPS topology, CI/CD, secret separation        |
-| `projectArchitecture.md`          | Module map, naming conventions, brick-by-brick       |
-| `blockchainDecentralization.md`   | Chia primitives, transparency revolution, trustless  |
-| `chiaDevTooling.md`               | Chia docs hub, tracing tools, RPC utilities, ops     |
-| `chiaPrimitivesPatterns.md`       | Singletons, CAT issuance, CR-CATs, secure-the-bag    |
-| `bowAppReference.md`              | **Live code** — WalletConnect/CHIP-0002, state channel lifecycle, commit-reveal battle protocol, Fighter/Tier types, TrackerClient, BattleState, gotchas |
-| `snesWorldEngine.md`              | SNES-style chunk world, biomes, procedural gen, NPC/quest systems, Godot web export, encounter→battle bridge |
-| `networkGameplayUX.md`            | Spell-cast UX pattern, `useSpellCast` hook, arcane loaders, WebSocket battles, chain tx progress, curse error messages |
+Use `docs/skills/manifest.json` when a compact domain map is enough and you do not need the full human-readable descriptions.
 
-Each skill file is self-contained and can be referenced independently when answering domain-specific questions.
+Only load the few relevant skills for the current quest instead of carrying duplicated skill tables into every agent-facing document.

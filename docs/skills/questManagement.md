@@ -37,8 +37,12 @@ docs/quests/
 │   └── enhance-*.md        # Completion backlogs for done quests
 ├── done/
 │   └── *.md                # Completed quests (foundation delivered)
-└── diagrams/
-    └── *.md                # Mermaid flow diagrams (shared)
+├── diagrams/
+│   └── *.md                # Mermaid flow diagrams (shared)
+└── sidequests/             # Parallel side quest lane
+    ├── README.md           # Side quest system overview
+    ├── patent-incubator.md # Active patent research side quest
+    └── ideas/              # Patent idea cards
 ```
 
 ### Folder Definitions
@@ -48,6 +52,13 @@ docs/quests/
 - **Limit:** 1-2 active quests maximum
 - **Criteria:** Has clear next action, actively coding/implementing
 - **Move to done/ when:** Foundation complete (30-60%), not 100%
+
+**Side Quests (`docs/quests/sidequests/`)**
+- Run **in parallel** with all main quests — never block the critical path
+- Patent incubator: capture novel ideas as they emerge from build work
+- Subagent-delegated research — main conversation stays focused on shipping
+- See `sidequests/README.md` for the side quest system
+- **Standing order:** After completing any main quest foundation, check if it produced a patentable idea
 
 **Backlog (`docs/quests/backlog/`)**
 - Future quests not yet started

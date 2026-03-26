@@ -30,3 +30,7 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Build / temp logs
+build-output.log
+*.log

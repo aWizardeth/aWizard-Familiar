@@ -10,6 +10,9 @@
 > `map.awizard.dev` (open world), `build.awizard.dev` (dev expansion), `stats.awizard.dev` (analytics)
 >
 > Goal: prove out the full DeFi OS on Chia testnet11, then write CHIPs for each primitive.
+>
+> **Quest Index:** [docs/quests/INDEX.md](quests/INDEX.md) — unified main + side quest routing  
+> **Side Quests:** [docs/quests/sidequests/](quests/sidequests/) — parallel innovation lane (patent incubator)
 
 ---
 
@@ -23,18 +26,24 @@
 - Phase 10: **Liquidity Manager** ([vaults.awizard.dev](http://localhost:5178)) — Foundation complete; optional post-launch liquidity-management layer ✅
 
 **✅ Just Completed:**
-- **🚀 CFMM Infrastructure Quest** — Sage RPC + 6 contracts + 3 pools + deployment pipeline ✅
+- **� Forge Swap Aggregator Foundation** — quest complete, moved to done/
+  - Sessions 1-2: 7-file aggregator module, adapter interface, multi-hop execution, SwapPanel replaced
+  - Session 3: Blocker analysis — puzzle reveals ✅, pool state mock fallback ✅
+  - Session 4: `bootstrapAmounts` added to STATIC_KNOWN_POOLS (T1.6: 10B TXCH + 1000 TEST1; T1.7: 100B TXCH + 100 each CAT), deterministic reserves, full data flow verified
+  - Enhancement backlog created: [enhance-forge-swap-aggregator.md](quests/backlog/enhance-forge-swap-aggregator.md)
+- **�🚀 CFMM Infrastructure Quest** — Sage RPC + 6 contracts + 3 pools + deployment pipeline ✅
 - **🧾 Forge Fee + Env Alignment** — on-chain protocol fee curried into the canonical n-asset pool, fee UI/env defaults aligned, `.env` restored as the single active operator config ✅
+- **🎉 T1.6 Pool Fully Live on testnet11** — Stage 1 + Stage 2 completed via Sage RPC two-phase pipeline; LP CAT `cff471f8...3af` confirmed visible in Sage wallet ✅
 
 **🚧 In Progress:**
-- **🪙 Forge LP CAT Ownership Pivot** — [docs/quests/forge-lp-cat-ownership-pivot.md](quests/forge-lp-cat-ownership-pivot.md) — active; protocol-fee and truth-boundary cleanup landed, next work is still pool-authoritative LP CAT mint/burn semantics plus CAT-backed withdraw validation
+- **🪙 Forge LP CAT Mint/Burn Authority** — [docs/quests/backlog/enhance-forge-lp-cat-mint-and-burn-authority.md](quests/backlog/enhance-forge-lp-cat-mint-and-burn-authority.md) — next active authority slice after the identity + bootstrap foundation; repeated pool-authoritative mint/burn wiring and deterministic live LP CAT issuance still remain
 - **🧊 Forge LP NFT Standard Migration** — [docs/quests/forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) — frozen prototype; retain this as reusable wallet-visible NFT receipt/container infrastructure for Treasure Chest and future NFT-native lanes
 - **🔐 Cloud Vault + Multisig Pivot** — optional future strategy layer; not required for initial Forge CFMM launch
 - Phase 1: Wallet Connect — integration ready, awaiting testnet wallet testing  
-- **🪄 Forge Stage 2 Execution Flow** — [docs/quests/forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md) — active; protocol-fee pool state and corrected fee accounting are now shipped, next work is one fresh testnet11 create + bootstrap replay against the new pool hash with reserve-companion evidence capture
 - **📦 Deployment Quest** — [docs/quests/backlog/deploy-testnet-infrastructure.md](quests/backlog/deploy-testnet-infrastructure.md) — backlogged; infra follow-through remains useful but is not the current Forge ownership lane
 - **🧩 Forge Bootstrap Protocol Reconciliation** — [docs/quests/backlog/reconcile-forge-bootstrap-protocol.md](quests/backlog/reconcile-forge-bootstrap-protocol.md) — backlogged architectural ledger; no longer a separate active implementation lane
 - **🖥️ Forge GUI Truth Lane** — [docs/quests/backlog/frontend-gui-pool-deployment.md](quests/backlog/frontend-gui-pool-deployment.md) — backlogged post-deploy UX verification lane
+- **🧭 Forge Pool Launch Flow Enhancements** — [docs/quests/backlog/enhance-forge-pool-launch-and-create-flow-redesign.md](quests/backlog/enhance-forge-pool-launch-and-create-flow-redesign.md) — post-foundation polish for asset search, live metrics, review-step flow, and real burn-initial-LP wiring
 - Phase 4: Perpetuals — frontend complete, awaiting contracts
 
 **📦 Ready to Deploy:**
@@ -50,17 +59,88 @@
 
 ## 🔮 Next Session Focus
 
-1. **Forge protocol-fee replay**
-  - create one fresh 2-asset testnet11 pool using the new `pool_singleton_n_fixed` hash
-  - confirm launcher id, target/state coin id, and reserve-companion evidence on-chain
-  - record whether the protocol treasury output appears as expected on swap-ready pools
-2. **Forge GUI truth proof**
-  - reload the fresh pool from recorded anchors
-  - run one tiny post-deploy action against that reloaded pool
-  - capture tx id, pool anchors, and whether reserve display remains truthful after the action
-3. **LP CAT ownership continuation**
-  - move from operator-style LP CAT bootstrap to pool-authoritative mint/burn semantics
-  - validate CAT-backed withdraw path and document the winning witness model
+1. **Pick next quest from backlog** (START HERE)
+   - Recommended: Enhance Forge Swap Aggregator → Track 5 live swap testing
+   - Alternative: Enhance LP CAT mint/burn authority wiring
+   - Alternative: External DEX adapters (Tibet, Dexie, Splash)
+   - See [quests/INDEX.md](quests/INDEX.md) for full backlog
+2. **🔀 Forge Swap Aggregator — live on-chain testing** (HIGH)
+   - connect Sage wallet, test actual swap execution against T1.6 + T1.7
+   - requires either Full Node on port 8555 or Sage-based pool state bridge for lineage proofs
+   - mock reserves work for UI/quote testing without full node
+3. **🔀 Forge Swap Aggregator — Phase 2 external DEX adapters** (MEDIUM)
+   - `tibetAdapter.ts` — Tibet Swap API at `api.v2.tibetswap.io`
+   - `dexieAdapter.ts` — Dexie orderbook at `dexie.space/v2/`
+   - `splashAdapter.ts` — Splash pools (API TBD)
+   - Each adapter = one new file implementing `LiquiditySource`, zero changes to core
+4. **🪙 Forge LP CAT authority wiring lane** (MEDIUM)
+   - wire the pool-authoritative LP CAT mint and burn path for deposits and withdrawals
+   - keep wallet-visible LP CAT balance as the first-class ownership signal
+   - T1.6 LP CAT `cff471f8...3af` + T1.7 LP CAT `7cfce6c5...603` both confirmed in Sage
+5. **WalletConnect liquidity for ordinary users** (LOW)
+   - tighten user-facing messaging around LP CAT witness availability
+6. **Stage-2 pipeline hardening** (LOW)
+   - eliminate remaining false-failure edge cases in progress display
+
+## 🏁 Completed
+
+- ✅ **2026-03-22** — Forge Swap Aggregator foundation + multi-hop execution delivered
+  - Aggregator module: `types.ts`, `forgeAdapter.ts`, `quoteEngine.ts`, `index.ts` — adapter pattern with `LiquiditySource` interface
+  - UI: `AggregatorSwap.tsx` (swap tab), `RoutePreview.tsx` (route visualization), `swapStore.ts` (Zustand state)
+  - Multi-hop execution: sequential hop runner with progress tracking, 3s settle delay, pool state refresh between hops
+  - Partial-failure recovery: user informed they hold intermediate asset if later hop fails
+  - Fixed 7 TypeScript errors from parallel SwapPanel→AggregatorSwap migration
+  - Clean build: `tsc --noEmit` 0 errors, `vite build` 1.77MB bundle
+  - **Session 3-4: Blocker analysis + bootstrapAmounts fix**
+  - Puzzle reveals confirmed populated from compiled CLVM hex
+  - `decodeMockPoolState()` confirmed implemented at poolIndexer.ts:535
+  - `bootstrapAmounts` added to STATIC_KNOWN_POOLS: T1.6 `['10000000000', '1000']`, T1.7 `['100000000000', '100', '100', '100']`
+  - Deterministic reserves now flow through: App mount → loadAllPools → decodeMockPoolState → forgeAdapter.setPoolState → quoteEngine.findRoutes
+  - Quest moved to done/, enhancement backlog created at `backlog/enhance-forge-swap-aggregator.md`
+  - INDEX.md cleaned: no active quests remaining; aggregator added to completed foundations
+  - Remaining: live on-chain testing (needs full node or Sage bridge), Phase 2 external DEX adapters
+- ✅ **2026-03-22** — T1.6 pool fully deployed on testnet11 — Stage 1 + Stage 2 via Sage RPC two-phase pipeline validated end-to-end
+  - Pool launcher: `34ac7576174cff3c4aa7899b62b6fe91d55fc061892d05b8afca233f7e1338f2`
+  - Target coin: `e8ec7eb63f3a92480abb74d15d6140fae08a3bc92e973bf37e28687bcc445720`
+  - LP CAT: `cff471f832a20343e921b3f5229adf94070295e77dedee69899d0ef22c1973af` — confirmed visible in Sage wallet
+  - Assets: TXCH + TEST 1 (50/50, 30bps fee, 50ppm protocol fee)
+  - Fix applied: Stage 1 routes through `sage_stage1_submit.py` (no WalletConnect approval); Stage 2 waits up to 90s for sync instead of hard-failing
+  - Fix applied: TypeScript `submitResultSucceeded({})` empty-object guard added; Sage always returns `{}` on success
+  - T1.5 and T1.6 registered in `STATIC_KNOWN_POOLS` in `poolIndexer.ts`; pools now survive `localStorage.clear()`
+  - T1.5 LP CAT ID still outstanding — locate from Sage and fill `poolIndexer.ts` TODO comment
+- ✅ **2026-03-22** — Pool inline detail + pool launch workspace UX hardened
+  - Redundant "Load Live Pool Anchor" lane removed from `PoolLaunchWorkspace.tsx`
+  - Smart `PoolInlineDetail` now uses `effectiveLpCat = historyBatch?.lpCatAssetId || pool.lpCatAssetId` fallback
+  - Sync-block errors distinguished from real failures; amber/green/red badges based on actual failure mode
+  - "Continue Bootstrap" gated on absence of LP CAT from any source
+- ✅ **2026-03-20** — Forge Sage RPC lane foundation + WalletConnect liquidity audit
+  - Subagents traced the new Sage RPC quest and audited the current add/remove liquidity path before code changes.
+  - Forge now has an expert-only Sage RPC preparation lane with a local `/api/sage-deploy` bridge, host/port inputs, and truthful `Prepared` launcher history records.
+  - Liquidity audit outcome: add/remove liquidity on already-deployed pools remains the correct WalletConnect-first public path; the creation curse stays isolated to combined deploy + first LP CAT genesis.
+- ✅ **2026-03-20** — Forge Sage/operator and Stage-2 quests moved to done as foundations
+  - Quest moved to done: [forge-sage-rpc-deploy-and-walletconnect-liquidity.md](quests/done/forge-sage-rpc-deploy-and-walletconnect-liquidity.md)
+  - Enhancement backlog: [enhance-forge-sage-rpc-deploy-and-walletconnect-liquidity.md](quests/backlog/enhance-forge-sage-rpc-deploy-and-walletconnect-liquidity.md)
+  - Quest moved to done: [forge-stage2-execution-flow.md](quests/done/forge-stage2-execution-flow.md)
+  - Enhancement backlog: [enhance-forge-stage2-execution-flow.md](quests/backlog/enhance-forge-stage2-execution-flow.md)
+- ✅ **2026-03-21** — Independent subagent research slices completed for LP CAT authority + Forge create flow
+  - LP CAT identity research locked the recommended pool-scoped TAIL direction around deterministic launcher-derived asset identity plus explicitly recorded `lp_cat_asset_id` in pool state.
+  - Authority lifecycle research locked the requirement that launch, deposit, and withdraw all include a recreated persistent authority coin.
+  - Builder mapping research identified the concrete launch, deposit, and withdraw touchpoints in [projects/chia-cfmm/src/lib/spendBundles.ts](projects/chia-cfmm/src/lib/spendBundles.ts) and the canonical announcement changes needed in [projects/chia-cfmm/contracts/pool_singleton_n_fixed.rue](projects/chia-cfmm/contracts/pool_singleton_n_fixed.rue).
+  - Frontend flow research reduced the redesign to a smallest viable slice: stepper shell + pool-type step + persistent summary card, with [projects/chia-cfmm/src/components/PoolCreationPanel.tsx](projects/chia-cfmm/src/components/PoolCreationPanel.tsx) kept as the temporary integration shell.
+- ✅ **2026-03-21** — Next implementation quests launched in subagents
+  - Protocol implementation prep chose a narrow first coding slice: deterministic LP CAT TAIL + authority bootstrap contracts, canonical singleton announcement payloads, and launcher-side identity helpers before full deposit/withdraw authority wiring.
+  - Frontend implementation prep chose a narrow first coding slice: create-pool store, stepper shell, pool-type step, and persistent summary card before the heavier coin-picker and deployment-step work.
+- ✅ **2026-03-21** — LP CAT identity + authority bootstrap foundation landed in code
+  - Forge now ships compiled `forge_lp_cat_tail.rue` and `lp_cat_authority_coin.rue` foundation contracts.
+  - The combined launcher + exact Stage 2 path now derives authoritative LP CAT identity metadata and creates a 1-mojo authority anchor coin during bootstrap.
+  - The pool singleton now emits canonical LP announcements with `new_total_lp_supply` while preserving legacy announcements for current bridge compatibility.
+  - Current truth remains explicit: the live eve CAT spend is still on the temporary `genesis_by_coin_id` lane until repeated pool-authoritative mint/burn is wired.
+- ✅ **2026-03-21** — Forge LP CAT ownership pivot moved to done as a foundation quest
+  - Quest moved to done: [forge-lp-cat-ownership-pivot.md](quests/done/forge-lp-cat-ownership-pivot.md)
+  - Enhancement backlog: [enhance-forge-lp-cat-mint-and-burn-authority.md](quests/backlog/enhance-forge-lp-cat-mint-and-burn-authority.md)
+- ✅ **2026-03-21** — Forge pool launch flow redesign moved to done as a frontend foundation quest
+  - Quest moved to done: [forge-pool-launch-and-create-flow-redesign.md](quests/done/forge-pool-launch-and-create-flow-redesign.md)
+  - Enhancement backlog: [enhance-forge-pool-launch-and-create-flow-redesign.md](quests/backlog/enhance-forge-pool-launch-and-create-flow-redesign.md)
 
 ---
 
@@ -442,7 +522,7 @@ After testnet proofs are live:
   - Quest: [forge-stage2-bootstrap.md](quests/done/forge-stage2-bootstrap.md) moved to done/
   - Canonical target frozen on `pool_singleton_n_fixed` for 2-10 assets
   - Standard singleton launcher path, persistent launcher history, and launcher parent metadata all wired through Forge
-  - Follow-up spell activated: [forge-stage2-execution-flow.md](quests/forge-stage2-execution-flow.md)
+  - Follow-up spell activated: [forge-stage2-execution-flow.md](quests/done/forge-stage2-execution-flow.md)
 - ✅ **2026-03-08** — Forge LP NFT standard-migration comparison path crossed the Sage-native mint boundary
   - Quest: [forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) is now frozen as prototype-complete infrastructure for Treasure Chest and future NFT-native lanes
   - Active CFMM ownership pivot: [forge-lp-cat-ownership-pivot.md](quests/forge-lp-cat-ownership-pivot.md)
@@ -457,6 +537,11 @@ After testnet proofs are live:
   - Network-aware treasury defaults now exist in code for mainnet and testnet11, while `.env` remains the single active local operator config
   - `.env.example` was updated into a real placeholder template and `.env.testnet` now reflects the current fee-routing story
   - Next proof spell: fresh testnet11 pool replay against the new canonical pool hash, then one post-deploy pool action
+- ✅ **2026-03-20** — Forge deployment strategy reprioritized around Sage RPC and public-user liquidity
+  - New active quest: [forge-sage-rpc-deploy-and-walletconnect-liquidity.md](quests/done/forge-sage-rpc-deploy-and-walletconnect-liquidity.md)
+  - Pair deployment is now explicitly treated as an expert/operator action first
+  - Public-user scope is now add/remove liquidity on already-deployed pools through WalletConnect + Sage-friendly flows
+  - Tibet-style backend operator service remains the fallback lane after Sage RPC mode, not the first implementation spell
 - ✅ **2026-01-15** — 🚀 CFMM Infrastructure Quest ✅ COMPLETE (100%)
   - Quest: [cfmm-deployment-infrastructure.md](quests/done/cfmm-deployment-infrastructure.md) moved to done/
   - Sage RPC integration: Live Sage wallet connection (mTLS on 127.0.0.1:9257) 
@@ -505,4 +590,4 @@ After testnet proofs are live:
 
 ---
 
-_Last updated: 2026-03-17_
+_Last updated: 2026-03-20_

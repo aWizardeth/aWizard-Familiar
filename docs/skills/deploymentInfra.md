@@ -28,6 +28,11 @@ VPS (Persistent Processes)
   |- gym-server (Express, SQLite, port 3001)
   \- Chia node (blockchain daemon)
 
+Hosted RPC (Coinset.org — no node required)
+  \- https://api.coinset.org/
+       Blocks, coins, fees, mempool, websocket
+       Free mainnet full-node RPC — drop-in for read queries
+
 Vercel (Separate Project)
   \- bow-app (Next.js, port 3000)
 ```
@@ -90,16 +95,19 @@ The current Chia reference tools commonly:
 | ---- | ------------------- |
 | chia-gaming | Mini-Eltoo state channels, potato protocol |
 | ChiaRPSGame | 3-party server signing, SpendBundle construction |
-| sage | WalletConnect CHIP-0002 commands |
+| sage | WalletConnect CHIP-0002 commands and wallet RPC surface |
 | secure-the-mint | NFT pre-launcher + eve spend pattern |
 | chia-gaming-tracker | Room discovery, state channel tracking |
 | rue | CLVM language for contract authoring |
-| chia-wallet-sdk | BLS AggSig, CoinSpend driver |
+| chia-wallet-sdk | lower-level wallet engine, spend construction, bindings Sage is built on |
+| coinset.org | hosted mainnet Chia full-node RPC — blocks, coins, fees, mempool, websocket |
 | database-manager | Declarative database provisioning |
 | build-wheels | Python wheel release automation |
 
 ## Source References
 - `arcane-battle-protocol/DEPLOYMENT.md` — full deployment guide
 - `awizard-gui/docs/ARCHITECTURE.md` — hosting and auth design
+- `https://www.coinset.org/docs` — hosted Chia RPC API (mainnet, free)
+- `https://github.com/coinset-org/cli` — Coinset CLI utility
 - `https://github.com/Chia-Network/database-manager` — config-driven database ops
 - `https://github.com/Chia-Network/build-wheels` — package build automation
