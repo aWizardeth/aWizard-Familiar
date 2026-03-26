@@ -47,13 +47,17 @@ aWizard agent appears in the VS Code agent dropdown automatically. All domain kn
 - **`docs/skills/deploymentInfra.md`** — Vercel/VPS architecture
 - **`docs/skills/projectArchitecture.md`** — module organization
 - **`docs/skills/blockchainDecentralization.md`** — Chia blockchain philosophy
-- **`docs/skills/bowAppReference.md`** — WalletConnect/CHIP-0002, state channel, battle protocol, Fighter types
+- **`docs/skills/bowAppReference.md`** — WalletConnect/CHIP-0002, multi-address scanning (`chip0002_getPublicKeys`), state channel, battle protocol, Fighter types
 - **`docs/skills/snesWorldEngine.md`** — SNES chunk world, biomes, procedural gen, Godot web export
 - **`docs/skills/networkGameplayUX.md`** — spell-cast UX, arcane loaders, WebSocket battles, chain tx progress
 
 #### Chia DeFi
 - **`docs/skills/chiaPerpetuals.md`** — on-chain CLOB, perpetuals, liquidations, oracles
 - **`docs/skills/nightspireTheme.md`** — Nightspire CSS token system, glow classes, shared palette
+- **`docs/skills/sageRpc.md`** — Sage Wallet RPC: address derivation, `increase_derivation_index`, multi-address scanning, coin/CAT/NFT/offer operations, operator patterns
+- **`docs/skills/chiaWalletSdk.md`** — Lower-level wallet-engine reference: spend construction, AggSig, signer behavior, `chia-wallet-sdk` (the library Sage is built on)
+- **`docs/skills/chiaPrimitivesPatterns.md`** — Singleton state machines, CAT issuance, CR-CATs, secure-the-bag distribution
+- **`docs/skills/chiaDevTooling.md`** — Chia docs hub, tracing tools, RPC tooling, package and ops utilities
 
 ### Architecture & Guides
 - **`docs/ARCHITECTURE.md`** — Full ecosystem deployment map
