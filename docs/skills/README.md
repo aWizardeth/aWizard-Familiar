@@ -1,5 +1,10 @@
 # Skills Index
 
+This file is the authoritative human-readable routing index for `docs/skills/`.
+
+Use it to decide which 1-3 skills to load for a quest instead of duplicating large skill tables in agent docs.
+For compact programmatic routing, see `docs/skills/manifest.json`.
+
 This index maps the skill library in `docs/skills/` to the kinds of work the repo is
 actually doing: Chia protocol design, DeFi product work, Nightspire frontend flows,
 and quest planning.
@@ -19,7 +24,8 @@ Use this file when:
 | --- | --- |
 | `blockchainDecentralization.md` | Core Chia primitives, trustless design, singletons, announcements, learning order |
 | `chiaPrimitivesPatterns.md` | Singleton patterns, CAT issuance, CR-CATs, secure-the-bag, asset architecture |
-| `chiaDevTooling.md` | Chia docs hub, tracing tools, RPC tooling, package and ops utilities |
+| `chiaWalletSdk.md` | Standard lower-level wallet-engine reference for signer behavior, spend construction, and Sage-under-the-hood work |
+| `chiaDevTooling.md` | Chia docs hub, tracing tools, RPC tooling, `chia-wallet-sdk`, and package and ops utilities |
 | `chiaPerpetuals.md` | Perps market design, margin, funding, liquidation, oracle architecture |
 | `nftRewards.md` | Chia NFT minting patterns, DID/royalties, reward collection design |
 | `bondPvpEconomy.md` | Escrow, mutual signing, PvP settlement economics |
@@ -28,7 +34,8 @@ Use this file when:
 
 | Skill | Use it for |
 | --- | --- |
-| `bowAppReference.md` | WalletConnect, CHIP-0002, state channels, tracker patterns, battle state |
+| `bowAppReference.md` | WalletConnect, CHIP-0002, state channels, tracker patterns, battle state, multi-address scanning |
+| `sageRpc.md` | Sage RPC address derivations, `increase_derivation_index`, gap-limit scan, operator patterns |
 | `discordActivityAuth.md` | Discord Activity auth, OAuth2, embedded app flow |
 | `networkGameplayUX.md` | Loading states, spell-cast UX, network feedback, multiplayer responsiveness |
 | `nightspireTheme.md` | Canonical Nightspire design language, tokens, component styling |
@@ -59,14 +66,18 @@ Use this file when:
 ### DeFi / Protocol Quest
 - `blockchainDecentralization.md`
 - `chiaPrimitivesPatterns.md`
-- `chiaDevTooling.md`
-- `deploymentInfra.md`
+- `chiaDevTooling.md` — only if tooling/Sage internals are in scope
+- `deploymentInfra.md` — only if deployment is in scope
 
 ### Wallet / Signing / Multisig Quest
-- `bowAppReference.md`
-- `blockchainDecentralization.md`
-- `chiaPrimitivesPatterns.md`
-- `chiaDevTooling.md`
+- `bowAppReference.md` — WalletConnect, CHIP-0002, multi-address scanning
+- `sageRpc.md` — operator/backend address derivation, gap-limit expansion
+- `chiaWalletSdk.md` — only when dropping below the Sage/WC layer into signer behavior
+
+Use `bowAppReference.md` first for all WalletConnect and CHIP-0002 UI flows, including `chip0002_getPublicKeys` multi-address patterns.
+Use `sageRpc.md` for backend/operator flows that call Sage RPC directly (`/get_derivations`, `/increase_derivation_index`).
+Use `chiaWalletSdk.md` only when the quest requires raw spend construction or wallet engine internals below Sage.
+Only add `blockchainDecentralization.md` + `chiaPrimitivesPatterns.md` if the quest also touches protocol design or asset architecture.
 
 ### NFT / Rewards / Collections Quest
 - `nftRewards.md`

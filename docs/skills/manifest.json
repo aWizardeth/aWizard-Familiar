@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "updated": "2026-03-26",
+  "notes": "Load only 1-2 skills per quest. README.md has full routing rationale.",
+  "domains": {
+    "chia-protocol": [
+      "blockchainDecentralization.md",
+      "chiaWalletSdk.md",
+      "chiaPrimitivesPatterns.md",
+      "chiaDevTooling.md",
+      "sageRpc.md"
+    ],
+    "wallets-and-signing": [
+      "bowAppReference.md",
+      "chiaWalletSdk.md",
+      "sageRpc.md",
+      "chiaPrimitivesPatterns.md",
+      "chiaDevTooling.md"
+    ],
+    "multi-address-scanning": [
+      "bowAppReference.md",
+      "sageRpc.md"
+    ],
+    "address-management": [
+      "sageRpc.md",
+      "bowAppReference.md"
+    ],
+    "frontend-and-ux": [
+      "nightspireTheme.md",
+      "networkGameplayUX.md",
+      "projectArchitecture.md"
+    ],
+    "discord-activity": [
+      "discordActivityAuth.md",
+      "networkGameplayUX.md"
+    ],
+    "game-systems": [
+      "battleKnowledge.md",
+      "aiSeedModel.md",
+      "apsTierSystem.md",
+      "leaderboardRankings.md",
+      "tournamentSystem.md",
+      "snesWorldEngine.md"
+    ],
+    "defi-and-markets": [
+      "chiaPerpetuals.md",
+      "bondPvpEconomy.md",
+      "nftRewards.md",
+      "sageRpc.md"
+    ],
+    "deployment-and-architecture": [
+      "deploymentInfra.md",
+      "projectArchitecture.md"
+    ],
+    "quest-planning": [
+      "questManagement.md"
+    ]
+  }
+}

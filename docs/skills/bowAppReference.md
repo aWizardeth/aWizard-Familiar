@@ -194,6 +194,115 @@ function wcErr(e: unknown): string {
 }
 ```
 
+### Multi-Address Scanning via `chip0002_getPublicKeys`
+
+Chia HD wallets derive a fresh address for every receive. A single wallet may hold
+coins across 50–200+ derived puzzle hashes. The three patterns below cover the most
+common surface area.
+
+#### Key Insight: When Sage aggregates automatically
+
+`chip0002_getAssetCoins` and `chip0002_getNFTs` already aggregate across **all**
+synced derived addresses internally — you do NOT need to enumerate addresses for
+basic asset queries. Sage handles the scan window for you.
+
+Use `chip0002_getPublicKeys` when you need the actual address list for:
+- Displaying a per-address balance breakdown (portfolio view)
+- Deriving puzzle hashes to build spends targeting a specific address
+- Verifying off-chain that a coin belongs to the connected wallet
+- Scanning beyond the wallet's auto-derived window (see gap-limit note)
+
+#### `chip0002_getPublicKeys` — Call Pattern
+
+```ts
+// Fetch unhardened derived public keys (returns hex G1 elements, 96 chars each)
+// offset + limit walk the derivation path in windows
+async function fetchAllWalletKeys(
+  client: SignClient,
+  session: SessionTypes.Struct,
+  windowSize = 20,
+): Promise<string[]> {
+  const chainId = session.namespaces.chia.chains[0];
+  const allKeys: string[] = [];
+  let offset = 0;
+
+  while (true) {
+    const batch = await client.request<string[]>({
+      topic:   session.topic,
+      chainId,
+      request: {
+        method: 'chip0002_getPublicKeys',
+        params: { limit: windowSize, offset },
+      },
+    });
+    if (!batch || batch.length === 0) break;
+    allKeys.push(...batch);
+    if (batch.length < windowSize) break;
+    offset += windowSize;
+  }
+  return allKeys; // ['0xabc...', '0xdef...', …]
+}
+```
+
+#### Puzzle Hash Derivation from a Public Key (greenwebjs)
+
+```ts
+import { fromHex, hash256 } from '@rigidnetwork/clvm-lib';
+// Or via greenwebjs StandardPuzzle:
+import { Puzzles } from '@greenweb/chia-blockchain-utils';
+
+// Derive the standard p2 puzzle hash for a given G1 public key hex:
+function pubkeyToPuzzleHash(pubkeyHex: string): string {
+  const puzzles = new Puzzles();
+  // stripHex: 0x-prefixed or raw both accepted by greenwebjs
+  return puzzles.standardPuzzleHash(pubkeyHex); // returns 0x-prefixed 64-char hex
+}
+
+// Batch derivation:
+const addressMap = allKeys.map((pk, i) => ({
+  index:      i,
+  publicKey:  pk,
+  puzzleHash: pubkeyToPuzzleHash(pk),
+}));
+```
+
+#### Gap-Limit Awareness
+
+Chia wallets track a **derivation window** (default ~20 unhardened indices).
+If coins were sent to index > window, `getAssetCoins` may miss them until
+`increase_derivation_index` is called (Sage RPC — see `sageRpc.md`).
+
+```ts
+// Defensive: after session connect, request enough keys to cover expected usage
+// 50 keys covers most practical wallets; increase for high-volume users
+const keys = await fetchAllWalletKeys(client, session, 50);
+// If the wallet returned fewer than requested, the window is auto-capped by Sage
+```
+
+#### Identifying Coin Ownership from a Coin Set
+
+```ts
+// Given a SpendableCoin, verify it belongs to the connected wallet:
+function coinBelongsToWallet(coin: SpendableCoin, knownPuzzleHashes: Set<string>): boolean {
+  const ph = coin.coin.puzzle_hash.replace(/^0x/, '').toLowerCase();
+  return knownPuzzleHashes.has(ph);
+}
+
+// Build the set once after connecting:
+const walletKeys   = await fetchAllWalletKeys(client, session);
+const puzzleHashes = new Set(walletKeys.map(k => pubkeyToPuzzleHash(k).replace(/^0x/, '').toLowerCase()));
+```
+
+#### Context Value Extension (multi-address variant)
+
+```ts
+interface WalletConnectContextValue {
+  // … existing fields …
+  getPublicKeys: (limit?: number, offset?: number) => Promise<string[]>;
+  // returns G1 hex array for the given window
+}
+```
+
 ---
 
 ## 2. State Channel Lifecycle
