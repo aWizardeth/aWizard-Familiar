@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-03-26",
+  "updated": "2026-04-08",
   "notes": "Load only 1-2 skills per quest. README.md has full routing rationale.",
   "domains": {
     "chia-protocol": [
@@ -8,7 +8,9 @@
       "chiaWalletSdk.md",
       "chiaPrimitivesPatterns.md",
       "chiaDevTooling.md",
-      "sageRpc.md"
+      "sageRpc.md",
+      "forgeLpCat.md",
+      "forgePoolLifecycleTesting.md"
     ],
     "wallets-and-signing": [
       "bowAppReference.md",
@@ -46,7 +48,23 @@
       "chiaPerpetuals.md",
       "bondPvpEconomy.md",
       "nftRewards.md",
-      "sageRpc.md"
+      "sageRpc.md",
+      "forgeLpCat.md",
+      "chiaDexieRouting.md",
+      "chiaTibetAmm.md"
+    ],
+    "external-liquidity-and-routing": [
+      "chiaDexieRouting.md",
+      "chiaTibetAmm.md",
+      "tibetUiFrontend.md",
+      "forgeLpCat.md",
+      "forgePoolLifecycleTesting.md"
+    ],
+    "external-dex-frontend": [
+      "tibetUiFrontend.md",
+      "chiaDexieRouting.md",
+      "nightspireTheme.md",
+      "networkGameplayUX.md"
     ],
     "deployment-and-architecture": [
       "deploymentInfra.md",

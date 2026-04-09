@@ -62,7 +62,13 @@ Fungible LP representation. Standard weighted CFMM.
 | LP token | Fungible CAT, ticker `ASSET1ASSET2-FORGE` |
 | Fee | Configurable per-pool (e.g. 0.3%) |
 | Math | `calcSwapOut`, `calcSwapIn`, `powFrac` — implemented in `cfmm.ts` |
-| Contracts | `pool_singleton.rue`, `swap_engine.rue`, `pool_launcher.rue` |
+| Contracts | `pool_singleton_v2.rue` for LP state, `swap_engine.rue` for swap settlement, `pool_launcher.rue` for pool launch |
+
+Forge's forward swap boundary is now explicit:
+
+- `pool_singleton_v2.rue` is the LP authority and state-transition lane
+- `swap_engine.rue` is the canonical on-chain settlement boundary behind the offer-first swap UX
+- external routed offers may be accepted through wallet-native take-offer methods or the local Sage RPC bridge when the browser session does not advertise those methods
 
 ### 2. NFT Vault — Treasure Chests
 
@@ -193,7 +199,7 @@ Walking into a location loads that subdomain's UI in an iframe/panel. Entering T
 
 ## ⚡ cast.awizard.dev — Cast (DEX Swap Router)
 
-Fast-path swap UI. Routes through Forge pools, finds best price, submits spend bundle.  
+Fast-path swap UI. Routes through Forge pools, finds best price, and settles through Chia offer flows.  
 Simple: pick two tokens, enter amount, cast the swap.
 
 ---

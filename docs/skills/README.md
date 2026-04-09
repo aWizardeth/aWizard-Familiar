@@ -53,6 +53,23 @@ Use this file when:
 | `tournamentSystem.md` | Brackets, seeding, prize logic |
 | `snesWorldEngine.md` | World navigation, map systems, encounter integration |
 
+### Forge DeFi Primitives
+
+> Forge-specific knowledge, distinct from generic Chia protocol patterns.
+
+| Skill | Use it for |
+| --- | --- |
+| `forgeLpCat.md` | Pool-controlled LP CAT TAIL, authority coin lifecycle, announcement format, puzzle hash derivation, bundle descriptor wiring |
+| `forgePoolLifecycleTesting.md` | Current V2 deployment/bootstrap/add/remove validation flow, puzzle-hash boundary, and testnet lifecycle guardrails |
+
+### External Liquidity and DEX Integrations
+
+| Skill | Use it for |
+| --- | --- |
+| `chiaDexieRouting.md` | Dexie quote flow, offer submission, route selection, token normalization, external execution boundaries |
+| `chiaTibetAmm.md` | Tibet router and pair model, XCH/CAT LP flows, offer-settled swap/add/remove behavior, reserve handling |
+| `tibetUiFrontend.md` | Tibet UI repo patterns for pair discovery, request caching, wallet UX, and external route presentation |
+
 ### Quest and Planning Workflow
 
 | Skill | Use it for |
@@ -69,6 +86,12 @@ Use this file when:
 - `chiaDevTooling.md` — only if tooling/Sage internals are in scope
 - `deploymentInfra.md` — only if deployment is in scope
 
+### External Liquidity / Aggregator Quest
+- `chiaDexieRouting.md`
+- `chiaTibetAmm.md`
+- `tibetUiFrontend.md` — only if frontend or wallet UX is in scope
+- `forgeLpCat.md` — only if local Forge LP or pool authority behavior is also in scope
+
 ### Wallet / Signing / Multisig Quest
 - `bowAppReference.md` — WalletConnect, CHIP-0002, multi-address scanning
 - `sageRpc.md` — operator/backend address derivation, gap-limit expansion
@@ -78,6 +101,10 @@ Use `bowAppReference.md` first for all WalletConnect and CHIP-0002 UI flows, inc
 Use `sageRpc.md` for backend/operator flows that call Sage RPC directly (`/get_derivations`, `/increase_derivation_index`).
 Use `chiaWalletSdk.md` only when the quest requires raw spend construction or wallet engine internals below Sage.
 Only add `blockchainDecentralization.md` + `chiaPrimitivesPatterns.md` if the quest also touches protocol design or asset architecture.
+
+Use `chiaDexieRouting.md` when the wallet flow must end in a Chia offer submitted to an external venue.
+Use `chiaTibetAmm.md` when comparing Forge pool logic to an existing XCH/CAT AMM implementation on Chia.
+Use `tibetUiFrontend.md` when the main problem is external route UX, pair discovery, or frontend request behavior.
 
 ### NFT / Rewards / Collections Quest
 - `nftRewards.md`

@@ -36,8 +36,9 @@
 - **🎉 T1.6 Pool Fully Live on testnet11** — Stage 1 + Stage 2 completed via Sage RPC two-phase pipeline; LP CAT `cff471f8...3af` confirmed visible in Sage wallet ✅
 
 **🚧 In Progress:**
-- **🪙 Forge LP CAT Mint/Burn Authority** — [docs/quests/backlog/enhance-forge-lp-cat-mint-and-burn-authority.md](quests/backlog/enhance-forge-lp-cat-mint-and-burn-authority.md) — next active authority slice after the identity + bootstrap foundation; repeated pool-authoritative mint/burn wiring and deterministic live LP CAT issuance still remain
-- **🧊 Forge LP NFT Standard Migration** — [docs/quests/forge-lp-nft-standard-migration.md](quests/forge-lp-nft-standard-migration.md) — frozen prototype; retain this as reusable wallet-visible NFT receipt/container infrastructure for Treasure Chest and future NFT-native lanes
+- **🔀 Build Forge Swap Execution Path** — [docs/quests/build-forge-swap-execution-path.md](quests/build-forge-swap-execution-path.md) — **ACTIVE** — Lock Forge to an offer-file-first swap architecture, audit current wallet capability gaps, implement the real swap settlement lane, and re-enable execution only where protocol and wallet support are truthful. No mainnet legacy compatibility assumptions.
+- **🔥 Build Pool-Controlled TAIL** — [docs/quests/build-forge-pool-controlled-tail.md](quests/build-forge-pool-controlled-tail.md) — **ACTIVE** — Replace one-time issuance TAIL with pool-singleton-gated elastic-supply TAIL in Rue. Enables trustless mint/burn of LP CAT on add/remove liquidity. Security model: TAIL curries launcher_id, validates singleton announcement. Two-step backend: (1) create pool via Sage RPC, (2) add/remove liquidity via WalletConnect (reusable)
+- **🧊 Forge LP NFT Standard Migration** — [docs/quests/done/forge-lp-nft-standard-migration.md](quests/done/forge-lp-nft-standard-migration.md) — frozen prototype; retain as reusable wallet-visible NFT receipt/container infrastructure for Treasure Chest only
 - **🔐 Cloud Vault + Multisig Pivot** — optional future strategy layer; not required for initial Forge CFMM launch
 - Phase 1: Wallet Connect — integration ready, awaiting testnet wallet testing  
 - **📦 Deployment Quest** — [docs/quests/backlog/deploy-testnet-infrastructure.md](quests/backlog/deploy-testnet-infrastructure.md) — backlogged; infra follow-through remains useful but is not the current Forge ownership lane
@@ -59,27 +60,34 @@
 
 ## 🔮 Next Session Focus
 
-1. **Pick next quest from backlog** (START HERE)
-   - Recommended: Enhance Forge Swap Aggregator → Track 5 live swap testing
-   - Alternative: Enhance LP CAT mint/burn authority wiring
-   - Alternative: External DEX adapters (Tibet, Dexie, Splash)
-   - See [quests/INDEX.md](quests/INDEX.md) for full backlog
-2. **🔀 Forge Swap Aggregator — live on-chain testing** (HIGH)
-   - connect Sage wallet, test actual swap execution against T1.6 + T1.7
-   - requires either Full Node on port 8555 or Sage-based pool state bridge for lineage proofs
-   - mock reserves work for UI/quote testing without full node
-3. **🔀 Forge Swap Aggregator — Phase 2 external DEX adapters** (MEDIUM)
-   - `tibetAdapter.ts` — Tibet Swap API at `api.v2.tibetswap.io`
-   - `dexieAdapter.ts` — Dexie orderbook at `dexie.space/v2/`
-   - `splashAdapter.ts` — Splash pools (API TBD)
-   - Each adapter = one new file implementing `LiquiditySource`, zero changes to core
-4. **🪙 Forge LP CAT authority wiring lane** (MEDIUM)
-   - wire the pool-authoritative LP CAT mint and burn path for deposits and withdrawals
-   - keep wallet-visible LP CAT balance as the first-class ownership signal
-   - T1.6 LP CAT `cff471f8...3af` + T1.7 LP CAT `7cfce6c5...603` both confirmed in Sage
-5. **WalletConnect liquidity for ordinary users** (LOW)
-   - tighten user-facing messaging around LP CAT witness availability
-6. **Stage-2 pipeline hardening** (LOW)
+1. **🔥 Build Pool-Controlled TAIL** (CRITICAL — ACTIVE QUEST)
+   - Update `forge_lp_cat_tail.rue` to enforce singleton announcement validation
+   - Update singleton to emit canonical `(MINT/MELT, delta, recipient)` announcements
+   - Wire authority coin lifecycle (bootstrap + recreate on each supply change)
+   - Update TypeScript builders for deterministic LP CAT asset-id from pool TAIL
+   - See [quests/build-forge-pool-controlled-tail.md](quests/build-forge-pool-controlled-tail.md)
+2. **🔀 Wire WalletConnect Add/Remove Liquidity** (HIGH — after TAIL)
+   - Step 2 reusable path: any user can add/remove liquidity via WalletConnect
+   - Same code path for all future deposits and withdrawals
+   - Mints LP CAT on deposit, melts LP CAT on withdraw — pool-controlled
+3. **🔀 Build Forge Swap Execution Path** (HIGH)
+  - keep swaps offer-file-first at the user layer
+  - `swap_engine` is the locked settlement boundary; `pool_singleton_v2` stays LP-only
+  - restore or recommit the missing fixture-backed validation artifacts for live pool `e35984cd...20cf`
+  - implement the real swap settlement path for supported pools and surface wallet capability gaps honestly
+4. **🧺 Build Offer-Based Liquidity Flow** (MEDIUM — BACKLOG)
+  - research offer-wrapped deposit and withdraw intents after the spend-bundle liquidity lane is proven
+  - keep LP add/remove spend-bundle-first until wallet capability improves
+5. **🔀 Forge Swap Aggregator — live on-chain testing** (MEDIUM)
+  - connect Sage wallet and validate the routed swap path after the execution quest lands
+  - mock reserves continue to support UI/quote testing without full node
+6. **📦 Verify TM10 pool on-chain** (MEDIUM)
+   - Confirm Stage 2 bundle included in block, target coin exists
+   - Test swap execution against the live pool state
+7. **🔀 Forge Swap Aggregator — Phase 2 external DEX adapters** (LOW)
+   - `tibetAdapter.ts`, `dexieAdapter.ts`, `splashAdapter.ts`
+   - Each adapter = one new file implementing `LiquiditySource`
+8. **Stage-2 pipeline hardening** (LOW)
    - eliminate remaining false-failure edge cases in progress display
 
 ## 🏁 Completed
@@ -99,6 +107,7 @@
   - Quest moved to done/, enhancement backlog created at `backlog/enhance-forge-swap-aggregator.md`
   - INDEX.md cleaned: no active quests remaining; aggregator added to completed foundations
   - Remaining: live on-chain testing (needs full node or Sage bridge), Phase 2 external DEX adapters
+- ✅ **2026-03-29** — TM10 (10-asset pool) Stage 2 bootstrap submitted on testnet11, operator LP CAT `FLPTM10` minted (1100 mojos, asset_id `418c18a5...`). Production architecture decision: LP = CAT with pool-controlled TAIL (elastic supply, mint/burn gated by singleton announcements). New active quest: [build-forge-pool-controlled-tail.md](quests/build-forge-pool-controlled-tail.md)
 - ✅ **2026-03-22** — T1.6 pool fully deployed on testnet11 — Stage 1 + Stage 2 via Sage RPC two-phase pipeline validated end-to-end
   - Pool launcher: `34ac7576174cff3c4aa7899b62b6fe91d55fc061892d05b8afca233f7e1338f2`
   - Target coin: `e8ec7eb63f3a92480abb74d15d6140fae08a3bc92e973bf37e28687bcc445720`
@@ -135,6 +144,17 @@
   - The combined launcher + exact Stage 2 path now derives authoritative LP CAT identity metadata and creates a 1-mojo authority anchor coin during bootstrap.
   - The pool singleton now emits canonical LP announcements with `new_total_lp_supply` while preserving legacy announcements for current bridge compatibility.
   - Current truth remains explicit: the live eve CAT spend is still on the temporary `genesis_by_coin_id` lane until repeated pool-authoritative mint/burn is wired.
+- ✅ **2026-04-01** — Forge CFMM pool testnet11 deployment foundation complete
+  - Quest moved to done: `deploy-forge-pool-testnet.md` → Stage 1 + Stage 2 confirmed
+  - `launcher_id`: `1d17a51c21200e687efa180dbba02764ba973600fdfb0b20afd7873bdc4dc83b`
+  - Stage 1 confirmed at h=3926044 (~91s). Stage 2 (P2 bootstrap) submitted, mempool=0.
+  - Key fix: bypassed `send_xch` entirely — reads Sage SQLite directly (WAL persists pending txs across restart)
+  - Enhancement backlog: [enhance-forge-reserve-coin-deposits.md](quests/backlog/enhance-forge-reserve-coin-deposits.md)
+- ✅ **2026-04-08** — Forge swap execution architecture clarified for the next implementation slice
+  - `swap_engine` locked as the canonical swap settlement boundary; `pool_singleton_v2` remains LP-only
+  - routed external offers may execute through wallet-native take-offer methods or the local Sage offer bridge where truthful
+  - Forge-native swap-engine routes remain quote-only until a pool-aware responder or submission lane is present and validated
+  - live proper-tail pool `e35984cd...20cf` has confirmed add/remove lifecycle evidence and remains the truthful swap-validation target
 - ✅ **2026-03-21** — Forge LP CAT ownership pivot moved to done as a foundation quest
   - Quest moved to done: [forge-lp-cat-ownership-pivot.md](quests/done/forge-lp-cat-ownership-pivot.md)
   - Enhancement backlog: [enhance-forge-lp-cat-mint-and-burn-authority.md](quests/backlog/enhance-forge-lp-cat-mint-and-burn-authority.md)
@@ -222,6 +242,9 @@ Implement all TypeScript back-end modules the CFMM frontend depends on.
 - [ ] Build `LiquidityForm.tsx` — add/remove liquidity, show LP NFT balance; wire deposit/withdraw bundles
 - [ ] Build `SplitLpModal.tsx` — split LP position; wire `buildSplitLpBundle`
 - [ ] Real `poolIndexer.ts` — replace mock with WalletConnect getPublicKeys → pool coin fetch; populate `currentPuzzleReveal` + `lineageProof`
+  - proven locally: `bootstrapTargetCoinId` / `bootstrapTargetPuzzleHash` can be the spent Stage-2 singleton, not the live child coin
+  - helper lane now derives the real post-bootstrap child coin id + puzzle hash from the captured Stage-2 payload
+  - remaining blocker: source of truth for the live child `currentPuzzleReveal` is still missing from checked-in app state
 - [ ] Display pool singleton coin on Spacescan testnet11
 
 ### Forge Focus — Stage 2 Bootstrap
